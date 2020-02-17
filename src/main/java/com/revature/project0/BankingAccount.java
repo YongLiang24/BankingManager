@@ -19,12 +19,21 @@ public interface BankingAccount {
 			System.out.println("How much is your starting balance?");
 			String startingBalance = input.nextLine();
 			try {
-			balance = Double.parseDouble(startingBalance);}
+			balance = Double.parseDouble(startingBalance);
+			
+			if(balance <1) {
+				System.out.println("Invalid input, minumum of 1 dollar is required");
+				balance = -1;
+			}
+			
+			
+			}
 			catch(NumberFormatException e) {
 				System.out.println("Invalid input, try again.");
 				balance =-1;
 			}
 		}
+		
 		
 		bankAccountInfo.put(userInput, balance);		
 	}
