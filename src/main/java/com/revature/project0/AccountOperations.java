@@ -33,7 +33,15 @@ public class AccountOperations implements BankingAccount{
 		
 		case "1":
 			BankingAccount.super.applyBankAccount();
+			System.out.println(bankAccountInfo);
+			this.CustomerMenu(input);
 			break;
+			
+		case "2":
+			BankingAccount.super.ViewBalance();
+			
+			
+			
 			
 		default:
 			break;

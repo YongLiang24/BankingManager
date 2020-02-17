@@ -4,14 +4,14 @@ import java.util.Scanner;
 
 public class Menus extends AccountOperations{
 
-	Scanner input = new Scanner(System.in);
+	static Scanner input = new Scanner(System.in);
 	AccountStorage accounts = new AccountStorage();
 	
 	/**
 	 * This method displays the main menu
 	 * @return a user input as a String type
 	 */
-	public void MainMenuInput() {
+	 public void MainMenuInput() {
 		System.out.println("Welcome to Bank Manager");
 		System.out.println("1. Customer Login");
 		System.out.println("2. Employee Login");
@@ -31,7 +31,7 @@ public class Menus extends AccountOperations{
 	 * This method displays sub menu options
 	 * @param userInput takes the input from main menu and divide the choices with switch statements
 	 */
-	public void SubMenus(String userInput) {
+	 public void SubMenus(String userInput) {
 		switch(userInput) {
 		
 			case "1":

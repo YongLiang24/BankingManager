@@ -21,12 +21,17 @@ public interface BankingAccount {
 			try {
 			balance = Double.parseDouble(startingBalance);}
 			catch(NumberFormatException e) {
-				System.out.println("Invalid input");
+				System.out.println("Invalid input, try again.");
 				balance =-1;
 			}
 		}
 		
-		
-		
+		bankAccountInfo.put(userInput, balance);		
+	}
+	
+	default void ViewBalance() {
+		for(Map.Entry<String, Double> entry: bankAccountInfo.entrySet()) {
+			System.out.println("Account: " +entry.getKey()+ " Balance: "+entry.getValue());
+		}
 	}
 }
