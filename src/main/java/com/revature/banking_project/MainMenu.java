@@ -1,15 +1,8 @@
 package com.revature.banking_project;
 
-import java.util.Scanner;
+public class MainMenu implements ScannerInput {
 
-public interface MainMenu {
-
-	Scanner input = new Scanner(System.in);
-	/**
-	 * this method valids and returns the user input from the main menu
-	 * @return
-	 */
-	default String mainMenu(){
+	protected String MainMenuList() {
 		System.out.println("Welcome to Bank Manager");
 		System.out.println("1. Customer Login");
 		System.out.println("2. Employee Login");

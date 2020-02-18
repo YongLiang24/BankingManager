@@ -2,11 +2,9 @@ package com.revature.banking_project;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
-public interface AccountRegister {
+public interface AccountRegister extends ScannerInput{
 	
-	Scanner input = new Scanner(System.in);
 	Map<String, String> customerAccountMap = new HashMap<String,String>();
 	
 	default boolean createAccount() {

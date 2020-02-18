@@ -1,8 +1,14 @@
 package com.revature.banking_project;
 
-public class MenuOperations implements MainMenu {
+public class MenuOperations implements AccountRegister{
 	
-	String MainMenuInput = MainMenu.super.mainMenu();
+
+	public MenuOperations() {
+		super();
+		MainMenu mainMenu = new MainMenu();
+		mainMenu.MainMenuList();
+	}
+	
 	
 	
 }
