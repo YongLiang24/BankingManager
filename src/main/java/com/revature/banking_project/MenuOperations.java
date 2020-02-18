@@ -16,7 +16,7 @@ public class MenuOperations extends BankAccounts implements AccountRegister{
 		do {
 		mainOption = mainMenu.MainMenuList();
 		CustomerLoginMenu(mainOption);
-		input.close();
+		//input.close();
 		}while(switchOn);	
 	}
 	
@@ -34,10 +34,7 @@ public class MenuOperations extends BankAccounts implements AccountRegister{
 							
 				switch(ctMenu.CTMenuList()) {
 					case "1":
-						System.out.println("Create a Banking Account");
-						System.out.println("Bank Account Name:");
-						input.nextLine();
-						applyBankAccount("name");
+						applyBankAccount();
 						break;
 					case "2":
 						break;

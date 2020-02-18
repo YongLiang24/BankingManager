@@ -10,13 +10,13 @@ public interface BankingAccount {
 	Map<String, Double> bankAccountInfo = new HashMap<String, Double>();
 	
 	default void applyBankAccount() {
-		System.out.println("Please type a name for your account.");
+		System.out.println("Bank Account Name: ");
 		String userInput = input.nextLine();
 		
 		double balance =-1;
 		
 		while(balance <0) {
-			System.out.println("How much is your starting balance?");
+			System.out.println("Starting balance: ");
 			String startingBalance = input.nextLine();
 			try {
 			balance = Double.parseDouble(startingBalance);
