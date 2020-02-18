@@ -6,7 +6,7 @@ import java.util.Map;
 public abstract class BankAccounts implements ScannerInput{
 	Map <String, Double>preApproveAccounts = new HashMap<String, Double>();
 	Map <String, Double>approvedAccounts = new HashMap<String, Double>();
-	
+	//Map<String, Object> userSpecificAccounts = new HashMap<String, Object>();
 	/**
 	 * apply for pre approved account bank account and validates user inputs
 	 * @param bankAccName
@@ -48,16 +48,34 @@ public abstract class BankAccounts implements ScannerInput{
 	 }
 	 
 	 void ApproveAccount(String name) {
-		 System.out.println("Type the name of an account to submit approval.");
+		 if(preApproveAccounts.isEmpty()) {
+			 System.out.println("No pending accounts available.");
+		 }
 		 for(Map.Entry<String, Double> account: preApproveAccounts.entrySet()) {
 			 if(account.getKey().equals(name)) {
 				 System.out.println("Account "+name+" has been approved.");
 				 approvedAccounts.put(name, account.getValue());
 				 preApproveAccounts.remove(account.getKey(), account.getValue());
-			 }else {
+			 }
+			 else {
 				 System.out.println("Account not found.");
 			 }
 		 }
 	 }
+
+	 void ViewBankAccount() {
+		 int i=0;
+		 if(!approvedAccounts.isEmpty()) {
+			 for(Map.Entry<String, Double> account: approvedAccounts.entrySet()) {
+				 i++;
+				 System.out.println(i+".Account: "+account.getKey()+", Balance: "+account.getValue()+"\n");
+			 }
+		 }
+		 else {
+			 System.out.println("No accounts available.\n");
+		 }
+	 }
+
+
 }
 

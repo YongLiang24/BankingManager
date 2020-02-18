@@ -7,6 +7,7 @@ public interface AccountRegister extends ScannerInput{
 	
 	Map<String, String> customerAccountMap = new HashMap<String,String>();//stores customer account info
 	Map<String, String> empAccountMap = new HashMap<String, String>();//stores employee account info
+
 	
 	default boolean CreateAccount() {
 		System.out.println("Account Registration");
@@ -53,7 +54,6 @@ public interface AccountRegister extends ScannerInput{
 		}
 		return false;
 	}
-	
 	
 	
 }

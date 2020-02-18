@@ -4,7 +4,7 @@ public class EmployeeMenu implements ScannerInput{
 
 	protected String EmpMenuList() {
 		System.out.println("1. Accounts Approval");
-		System.out.println("2. View Customer Accounts");
+		System.out.println("2. View Bank Accounts");
 		System.out.println("3. View Transaction Logs");
 		System.out.println("4. Sign Out");
 		

@@ -8,6 +8,7 @@ public class MenuOperations extends BankAccounts implements AccountRegister{
 	EmployeeMenu empMenu = new EmployeeMenu();
 	boolean switchOn = true;
 	boolean ctSwitch;
+	String currentCustomerAccount;
 	/**
 	 * Constructor
 	 */
@@ -38,10 +39,13 @@ public class MenuOperations extends BankAccounts implements AccountRegister{
 						applyBankAccount();
 						break;
 					case "2":
+						System.out.println("balance not implemented yet\n");
 						break;
 					case "3":
+						System.out.println("deposit not available yet\n");
 						break;
 					case "4":
+						System.out.println("SYSTEM DOWN\n");
 						break;
 					case "5":
 						ctSwitch =false;
@@ -49,7 +53,7 @@ public class MenuOperations extends BankAccounts implements AccountRegister{
 					}						
 				}
 			}else {
-				System.out.println("Invalid Username or Password - Returning to Main Menu.\n");				
+				System.out.println("Invalid Username or Password, Please register.\n");				
 			}			
 			break;
 		case "2":
@@ -65,10 +69,15 @@ public class MenuOperations extends BankAccounts implements AccountRegister{
 					 switch(empMenu.EmpMenuList()) {
 					 case "1":
 						DisplayPreApproveAccount();
+						System.out.println("Please type a account name to submit approval.");
+						String approveName = input.nextLine();
+						ApproveAccount(approveName);
 						 break;
 					 case "2":
+						 ViewBankAccount();
 						 break;
 					 case "3":
+						 System.out.println("View log is not available");
 						 break;
 					 case "4":
 						 ctSwitch =false;
