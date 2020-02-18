@@ -3,11 +3,11 @@ package com.revature.banking_project;
 public class MenuOperations extends BankAccounts implements AccountRegister{
 	
 	private String mainOption;
-	private String empOption;
 	MainMenu mainMenu = new MainMenu();
 	CustomerMenu ctMenu = new CustomerMenu();
 	EmployeeMenu empMenu = new EmployeeMenu();
 	boolean switchOn = true;
+	boolean ctSwitch;
 	/**
 	 * Constructor
 	 */
@@ -31,8 +31,9 @@ public class MenuOperations extends BankAccounts implements AccountRegister{
 			System.out.println("Password: ");
 			String userPassword = input.nextLine();
 			if(IsAccountValid(userName, userPassword)) {
-							
-				switch(ctMenu.CTMenuList()) {
+				ctSwitch = true;	
+				while(ctSwitch == true){
+					switch(ctMenu.CTMenuList()) {
 					case "1":
 						applyBankAccount();
 						break;
@@ -43,8 +44,9 @@ public class MenuOperations extends BankAccounts implements AccountRegister{
 					case "4":
 						break;
 					case "5":
+						ctSwitch =false;
 						break;
-					default: break;
+					}						
 				}
 			}else {
 				System.out.println("Invalid Username or Password - Returning to Main Menu.\n");				
@@ -58,19 +60,23 @@ public class MenuOperations extends BankAccounts implements AccountRegister{
 			System.out.println("password: ");
 			String empPassword = input.nextLine();
 			if(IsEmpValid(empName, empPassword)) {
-				 empOption = empMenu.EmpMenuList();
-				 switch(empOption) {
-				 case "1":
-					 System.out.println("mad it here");
-					 break;
-				 case "2":
-					 break;
-				 case "3":
-					 break;
-				 case "4":
-					 break;
-				 default: break;
-				 }
+				ctSwitch = true;
+				while(ctSwitch) {
+					 switch(empMenu.EmpMenuList()) {
+					 case "1":
+						DisplayPreApproveAccount();
+						 break;
+					 case "2":
+						 break;
+					 case "3":
+						 break;
+					 case "4":
+						 ctSwitch =false;
+						 break;
+					 default: break;
+					 }
+				}			
+
 			}else {
 				System.out.println("Invalid Username or Password - Returning to Main Menu.\n");				
 			}
@@ -85,8 +91,5 @@ public class MenuOperations extends BankAccounts implements AccountRegister{
 		default:			
 			break;
 		}
-	}
-	
-	
-	
+	}	
 }

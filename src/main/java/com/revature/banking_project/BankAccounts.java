@@ -5,18 +5,13 @@ import java.util.Map;
 
 public abstract class BankAccounts implements ScannerInput{
 	Map <String, Double>preApproveAccounts = new HashMap<String, Double>();
-	Map <String, String>approvedAccounts = new HashMap<String, String>();
+	Map <String, Double>approvedAccounts = new HashMap<String, Double>();
 	
-	void applyBankAccount(String bankAccName, double initBalance) {
-		
-		if(!preApproveAccounts.containsKey(bankAccName)) {
-			System.out.println("Account Created");
-			preApproveAccounts.put(bankAccName, initBalance);
-		}else {
-			System.out.println("this account already exist.");
-		}
-	}
-	
+	/**
+	 * apply for pre approved account bank account and validates user inputs
+	 * @param bankAccName
+	 * @param initBalance
+	 */
 	 void applyBankAccount() {
 		System.out.println("Bank Account Name: ");
 		String userInput = input.nextLine();		
@@ -30,16 +25,39 @@ public abstract class BankAccounts implements ScannerInput{
 			if(balance <1) {
 				System.out.println("Invalid input, minumum of 1 dollar is required");
 				balance = -1;
-			}
-			
-			
+			}		
 			}
 			catch(NumberFormatException e) {
 				System.out.println("Invalid input, try again.");
 				balance =-1;
 			}
 		}
-		
+		if(!preApproveAccounts.containsKey(userInput)) {
+			System.out.println("Account Name: "+userInput +" with Balance: "+ "$"+balance+ " is Created," + " Pending for Approval.\n");
 			preApproveAccounts.put(userInput, balance);
+		}else {
+			System.out.println("Account Already Exist.");
+		}
+			
 	}
+
+	 void DisplayPreApproveAccount() {
+		 for(Map.Entry<String, Double> account: preApproveAccounts.entrySet()) {
+			 System.out.println("Account Name:"+account.getKey()+", -Balance:"+account.getValue());
+		 }
+	 }
+	 
+	 void ApproveAccount(String name) {
+		 System.out.println("Type the name of an account to submit approval.");
+		 for(Map.Entry<String, Double> account: preApproveAccounts.entrySet()) {
+			 if(account.getKey().equals(name)) {
+				 System.out.println("Account "+name+" has been approved.");
+				 approvedAccounts.put(name, account.getValue());
+				 preApproveAccounts.remove(account.getKey(), account.getValue());
+			 }else {
+				 System.out.println("Account not found.");
+			 }
+		 }
+	 }
 }
+

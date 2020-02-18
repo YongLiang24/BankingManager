@@ -41,6 +41,12 @@ public interface AccountRegister extends ScannerInput{
 		return false;
 	}
 	
+	/**
+	 * this method validate for employee login
+	 * @param username
+	 * @param password
+	 * @return
+	 */
 	default boolean IsEmpValid(String username, String password) {
 		if(empAccountMap.containsKey(username) && empAccountMap.containsValue(password)) {
 			return true;
