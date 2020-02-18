@@ -16,7 +16,7 @@ public class CustomerMenu implements ScannerInput{
 		
 		String userInput = input.nextLine();
 		while(!(userInput.matches("1") || userInput.matches("2") || userInput.matches("3") || userInput.matches("4") || userInput.matches("5"))) {
-			System.out.println("Invalid input, please select option 1, 2, 3 or 4");
+			System.out.println("Invalid input, please select option 1, 2, 3 or 4\n");
 			 userInput = input.nextLine();
 			 
 		}

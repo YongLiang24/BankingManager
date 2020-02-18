@@ -26,10 +26,10 @@ public class MenuOperations extends BankAccounts implements AccountRegister{
 		
 		switch(option) {
 		case "1":
-			System.out.println("Welcome to Customer Login.");
-			System.out.println("Username:");
+			System.out.println("Welcome to Customer Login.\n");
+			System.out.println(systemMessage+"Username:");
 			String userName = input.nextLine();
-			System.out.println("Password: ");
+			System.out.println(systemMessage+"Password: ");
 			String userPassword = input.nextLine();
 			if(IsAccountValid(userName, userPassword)) {
 				ctSwitch = true;	
@@ -53,15 +53,15 @@ public class MenuOperations extends BankAccounts implements AccountRegister{
 					}						
 				}
 			}else {
-				System.out.println("Invalid Username or Password, Please register.\n");				
+				System.out.println(systemMessage+"Invalid Username or Password, Please register.\n");				
 			}			
 			break;
 		case "2":
-			System.out.println("Welcome to Employee Login");
-			System.out.println("Test Account: name: admin - pass: 123");
-			System.out.println("username: ");
+			System.out.println("Welcome to Employee Login\n");
+			System.out.println(systemMessage+"Test Account: name: admin - pass: 123\n");
+			System.out.println(systemMessage+"username: ");
 			String empName = input.nextLine();
-			System.out.println("password: ");
+			System.out.println(systemMessage+"password: ");
 			String empPassword = input.nextLine();
 			if(IsEmpValid(empName, empPassword)) {
 				ctSwitch = true;
@@ -69,7 +69,7 @@ public class MenuOperations extends BankAccounts implements AccountRegister{
 					 switch(empMenu.EmpMenuList()) {
 					 case "1":
 						DisplayPreApproveAccount();
-						System.out.println("Please type a account name to submit approval.");
+						System.out.println(systemMessage+"Please type a account name to submit approval.");
 						String approveName = input.nextLine();
 						ApproveAccount(approveName);
 						 break;
@@ -77,7 +77,7 @@ public class MenuOperations extends BankAccounts implements AccountRegister{
 						 ViewBankAccount();
 						 break;
 					 case "3":
-						 System.out.println("View log is not available");
+						 System.out.println(systemMessage+"View log is not available");
 						 break;
 					 case "4":
 						 ctSwitch =false;
@@ -87,14 +87,14 @@ public class MenuOperations extends BankAccounts implements AccountRegister{
 				}			
 
 			}else {
-				System.out.println("Invalid Username or Password - Returning to Main Menu.\n");				
+				System.out.println(systemMessage+"Invalid Username or Password - Returning to Main Menu.\n");				
 			}
 			break;
 		case "3":
 			CreateAccount();		
 			break;
 		case "4":
-			System.out.println("See You Again!");
+			System.out.println(systemMessage+"See You Again!");
 			System.exit(0);
 			break;			
 		default:			

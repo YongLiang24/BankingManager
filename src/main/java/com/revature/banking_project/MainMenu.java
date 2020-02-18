@@ -10,7 +10,7 @@ public class MainMenu implements ScannerInput {
 		System.out.println("4. Exit");
 		String userInput = input.nextLine();		
 		while(!(userInput.matches("1") || userInput.matches("2") || userInput.matches("3") || userInput.matches("4"))) {
-			System.out.println("Invalid input, please select options from 1-4");
+			System.out.println(systemMessage+"Invalid input, please select options from 1-4\n");
 			 userInput = input.nextLine();
 		}		
 		return userInput;

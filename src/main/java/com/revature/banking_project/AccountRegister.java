@@ -11,18 +11,18 @@ public interface AccountRegister extends ScannerInput{
 	
 	default boolean CreateAccount() {
 		System.out.println("Account Registration");
-		System.out.println("Username: ");
+		System.out.println(systemMessage+"Username: \n");
 		String userInput = input.nextLine();
-		System.out.println("Password: ");
+		System.out.println(systemMessage+"Password: \n");
 		String userPassword = input.nextLine();	
 		if(!customerAccountMap.containsKey(userInput)) {
 			customerAccountMap.put(userInput, userPassword);
-			System.out.println("Account Created!\n");
+			System.out.println(systemMessage+"Account Created!\n");
 			
 			return true;
 		}
 		else {
-			System.out.println("Account Already Exist.\n");
+			System.out.println(systemMessage+"Account Already Exist.\n");
 			return false;
 		}
 	}
