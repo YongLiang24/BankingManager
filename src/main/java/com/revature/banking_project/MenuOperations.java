@@ -39,13 +39,13 @@ public class MenuOperations extends BankAccounts implements AccountRegister{
 						applyBankAccount();
 						break;
 					case "2":
-						System.out.println("balance not implemented yet\n");
+						ViewBalance();
 						break;
 					case "3":
-						System.out.println("deposit not available yet\n");
+						AddDeposit();
 						break;
 					case "4":
-						System.out.println("SYSTEM DOWN\n");
+						WithdrawBalance();
 						break;
 					case "5":
 						ctSwitch =false;

@@ -42,8 +42,10 @@ public abstract class BankAccounts implements ScannerInput{
 	}
 
 	 void DisplayPreApproveAccount() {
+		 int i=0;
 		 for(Map.Entry<String, Double> account: preApproveAccounts.entrySet()) {
-			 System.out.println("Account Name:"+account.getKey()+", -Balance:"+account.getValue());
+			 i++;
+			 System.out.println(i+".Account Name:"+account.getKey()+", -Balance:"+account.getValue()+"\n");
 		 }
 	 }
 	 
@@ -53,12 +55,12 @@ public abstract class BankAccounts implements ScannerInput{
 		 }
 		 for(Map.Entry<String, Double> account: preApproveAccounts.entrySet()) {
 			 if(account.getKey().equals(name)) {
-				 System.out.println("Account "+name+" has been approved.");
+				 System.out.println("Account "+name+" has been approved.\n");
 				 approvedAccounts.put(name, account.getValue());
 				 preApproveAccounts.remove(account.getKey(), account.getValue());
 			 }
 			 else {
-				 System.out.println("Account not found.");
+				 System.out.println("Incorrect Account Name. Try Again");
 			 }
 		 }
 	 }
@@ -76,6 +78,99 @@ public abstract class BankAccounts implements ScannerInput{
 		 }
 	 }
 
+	 void ViewBalance() {
+		int i=0;
+		 if(!approvedAccounts.isEmpty()) {
+			 for(Map.Entry<String, Double> account: approvedAccounts.entrySet()) {
+				 i++;
+				 System.out.println(1+"."+account.getKey()+"  -  $"+account.getValue()+"\n");
+			 }
+		 }else {
+			 System.out.println("No accounts found.\n");
+		 }
+	 }
 
+	 void AddDeposit() {
+
+		 if(approvedAccounts.isEmpty()) {
+			 System.out.println("No accounts available.\n");
+		 }
+		 else {
+			 for(Map.Entry<String, Double> account: approvedAccounts.entrySet()) {
+				 System.out.println(1+"."+account.getKey()+"  -  $"+account.getValue()+"\n");
+			 }
+		 }
+		 
+			System.out.println("Type an account name for the deposit.\n");
+			String accountName = input.nextLine();
+		
+			double balance =-1;		
+			while(balance <0) {
+				System.out.println("Choose an amount for the deposit. \n");
+				String depositAmount=input.nextLine();
+				try {
+				balance = Double.parseDouble(depositAmount);
+				
+				if(balance <1) {
+					System.out.println("Invalid input, minumum of 1 dollar is required");
+					balance = -1;
+				}		
+				}
+				catch(NumberFormatException e) {
+					System.out.println("Invalid input, try again.");
+					balance =-1;
+				}
+			}
+		 for(Map.Entry<String, Double> account: approvedAccounts.entrySet()) {
+			if(account.getKey().equals(accountName)) {
+				double sum = account.getValue()+balance;
+				approvedAccounts.put(account.getKey(), sum);
+				System.out.println("$"+balance+" has been added to "+account.getKey()+". The new balance is now $"+sum+"\n");
+			}else {
+				System.out.println("Account not found. Try Again.\n");
+			}
+		 }
+	 }
+
+	 void WithdrawBalance() {
+		 if(approvedAccounts.isEmpty()) {
+			 System.out.println("No accounts available.\n");
+		 }
+		 else {
+			 for(Map.Entry<String, Double> account: approvedAccounts.entrySet()) {
+				 System.out.println(1+"."+account.getKey()+"  -  $"+account.getValue()+"\n");
+			 }
+		 }
+		 
+			System.out.println("Type an account name for withdrawal.\n");
+			String accountName = input.nextLine();
+		
+			double balance =-1;		
+			while(balance <0) {
+				System.out.println("Choose an amount to withdraw. \n");
+				String depositAmount=input.nextLine();
+				try {
+				balance = Double.parseDouble(depositAmount);
+				
+				if(balance <1) {
+					System.out.println("Invalid input, minumum of 1 dollar is required");
+					balance = -1;
+				}		
+				}
+				catch(NumberFormatException e) {
+					System.out.println("Invalid input, try again.");
+					balance =-1;
+				}
+			}
+		 for(Map.Entry<String, Double> account: approvedAccounts.entrySet()) {
+			if(account.getKey().equals(accountName)) {
+				double difference = account.getValue()-balance;
+				approvedAccounts.put(account.getKey(), difference);
+				System.out.println("$"+balance+" has been withdrawn from "+account.getKey()+". The new balance is now $"+difference+"\n");
+			}else {
+				System.out.println("Account not found. Try Again.\n");
+			}
+		 }
+	 }
 }
 
