@@ -41,7 +41,48 @@ public class Menus implements ScannerInput{
 	}
 	
 	public Customer CustomerLogin() {
-		return null;
+		Customer ctLogin;
+		System.out.println("");
+		System.out.println("  **********Log In Menu**********\n");
+		System.out.println("           Account Name:\n");
+		String accountName = input.nextLine();
+		System.out.println("           Password:");
+		String accountPass = input.nextLine();
+		ctLogin = new Customer(accountName, accountPass);
+		return ctLogin;
 	}
+	
+	public String BankingMenu() {
+		System.out.println("");
+		System.out.println("  **********Banking Menu**********\n");
+		System.out.println("       1. Apply for Bank Account");
+		System.out.println("       2. View Account Balance");	
+		System.out.print("       3. Withdraw");
+		System.out.println("    4. Deposite");
+		System.out.print("       5. Transfer");
+		System.out.println("    6. Notification");
+		System.out.println("       7. Sign Out");
+		String result = input.nextLine();		
+		return result;
+	}
+	
+	public BankAccount ApplyForAccount() {
+		
+		BankAccount bank;
+		System.out.println("");
+		System.out.println("  **********Apply for Banking Account**********\n");
+		System.out.println("       Create a name for your banking account:");
+		String bankAccountName = input.nextLine();
+		System.out.println("Choose an account type:\n");
+		System.out.print("       1. Checking");
+		System.out.print("       2. Saving");
+		System.out.println("       3. Investment");
+		String accountType = input.nextLine();
+		System.out.println("Starting Balance:");
+		double startingBalance = input.nextDouble();
+		bank = new BankAccount(bankAccountName, accountType, startingBalance);	
+		return bank;
+	}
+	
 	
 }

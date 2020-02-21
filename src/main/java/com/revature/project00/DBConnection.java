@@ -5,7 +5,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBConnection {
-
+/**
+ * Singleton design pattern connection object.
+ */
 	private static DBConnection instanceObj;//declare instance of this class
 	private static Connection connect =null;
 	
