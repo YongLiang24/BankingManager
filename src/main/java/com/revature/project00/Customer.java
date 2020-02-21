@@ -11,6 +11,22 @@ public class Customer {
 		this.username = username;
 		this.password = password;
 	}
+	
+	
+	/**
+	 * This overloaded constructor accepts only username and password for login method
+	 * @param username
+	 * @param password
+	 */
+	public Customer(String username, String password) {
+		super();
+		this.username = username;
+		this.password = password;
+	}
+
+
+
+
 	public String getFullName() {
 		return fullName;
 	}

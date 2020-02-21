@@ -7,7 +7,6 @@ import java.sql.SQLException;
 
 public class CustomerDaoImp implements CustomerDao{
 
-	Customer ct;//declare a customer object
 	private  PreparedStatement preSt = null;
 	private  ResultSet resultSet = null;
 

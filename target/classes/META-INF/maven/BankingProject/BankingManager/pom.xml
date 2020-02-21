@@ -24,7 +24,7 @@
 	    <artifactId>ojdbc8</artifactId>
 	    <version>12.2.0.1</version>
 	    <scope>system</scope>
-	    <systemPath>C:\Users\yongl\OneDrive\Desktop\ojdbc8.jar</systemPath>
+	    <systemPath>C:\Users\yongl\Desktop\ojdbc8.jar</systemPath>
 </dependency>
    	
   	</dependencies>
