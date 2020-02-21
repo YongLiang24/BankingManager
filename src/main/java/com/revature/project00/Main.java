@@ -26,6 +26,7 @@ public class Main {
 		 * 
 		 */
 		BankingLogics test = new BankingLogics();
+		test.ApplyForAccount();
 	}
 
 }

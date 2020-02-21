@@ -1,9 +1,12 @@
 package com.revature.project00;
 
 public class BankAccount {
+	/**
+	 * This is a POJO class that responsibles for creating BankAccount objects with attributes.
+	 */
 	private String bankAccountName;
 	private String accountType;
-	private boolean approvalStatus;
+	private boolean approvalStatus = false;
 	private double balance=0;
 	
 	
