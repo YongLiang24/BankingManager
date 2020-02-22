@@ -30,22 +30,24 @@ public class Main {
 
 		 BankingLogics test = new BankingLogics();
 
-		/*
-		 * Connection conn =null; PreparedStatement pStatement = null; ResultSet
-		 * resultSet = null;
-		 * 
-		 * try { conn =
-		 * DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:yong",
-		 * "yongliang", "yl"); } catch (SQLException e) { e.printStackTrace(); } String
-		 * query2 = "select * from Customer";//? is a parameter try {
-		 * pStatement=conn.prepareStatement(query2); resultSet =
-		 * pStatement.executeQuery(); while(resultSet.next()) {
-		 * System.out.println(resultSet.getString(1)); } } catch (SQLException e) { //
-		 * TODO Auto-generated catch block e.printStackTrace(); }
-		 * 
-		 * try { conn.close(); } catch (SQLException e) { // TODO Auto-generated catch
-		 * block e.printStackTrace(); }
-		 */
+		
+//		  Connection conn =null; 
+//		  PreparedStatement pStatement = null; 
+//		  ResultSet resultSet = null;
+//		  
+//		  try { conn =DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:yong","yongliang", "yl"); } 
+//		  catch (SQLException e) { e.printStackTrace(); } 
+//		  
+//		  String query2 = "select * from employee";
+//		  try {
+//		  pStatement=conn.prepareStatement(query2); 
+//		  resultSet = pStatement.executeQuery(); 
+//		  while(resultSet.next()) {
+//		  System.out.println(resultSet.getString(1)); 
+//		  } } catch (SQLException e) { 
+//			  e.printStackTrace(); }
+		  
+		 
 
 		
 		

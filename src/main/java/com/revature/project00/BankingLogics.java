@@ -1,14 +1,8 @@
 package com.revature.project00;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
-public class BankingLogics extends Menus {
-
-
-	Connection conn = DBConnection.getInstance().getConnect();	
-	Customer ct;
+public class BankingLogics extends Menus {	
 	boolean switchOn = true;
 
 	public BankingLogics() {
@@ -16,13 +10,6 @@ public class BankingLogics extends Menus {
 		do {
 			MainLogic(MainMenuDisplay());
 		} while (switchOn);
-		
-		try {
-			conn.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
 	}
 
@@ -33,21 +20,14 @@ public class BankingLogics extends Menus {
 			switch (option) {
 			case "1":
 				Customer ct = CustomerLogin();
-				if(ValidateCustomerLogin(ct.getUsername(), ct.getPassword())) {
-					System.out.println("         ***************");
-					System.out.println("           Login Success. ");
-					System.out.println("         ***************");
-					BankingMenu();
-					
-				}else {
-
-					System.out.println("****************************************************");
-					System.out.println("  Incorrect username or password. Please try again. ");
-					System.out.println("****************************************************");
-					
+				String ctQuery ="select * from customer";
+				if(ValidateLogin(ct.getUsername(), ct.getPassword(), ctQuery)) {			
+					BankingMenu();					
 				}
 				break;
 			case "2":
+				Customer ct1 = SignupCustomerAccount();
+				CreateCtAccount(ct1.getFullName(),ct1.getUsername(),ct1.getPassword());
 				break;
 			case "3":
 				break;
@@ -56,7 +36,12 @@ public class BankingLogics extends Menus {
 			}
 			break;
 		case "2":
-			EmpLogin();
+			Employee emp = EmpLogin();
+			System.out.println(emp.getEmpUsername() + "///"+emp.getEmpPassword());
+			String empQuery="select * from employee";
+			if(ValidateLogin(emp.getEmpUsername(), emp.getEmpPassword(), empQuery)) {
+				EmpLoggedMenu();				
+			}
 			break;
 		case "3":
 			System.out.println("Program Terminated");
@@ -68,45 +53,27 @@ public class BankingLogics extends Menus {
 		}
 
 	}
-
-	/*
-	 * private boolean ValidateCustomerLogin(String username, String password) {
-	 * String query="select * from Customer"; result = ctDao.SelectAccount(conn,
-	 * query); try { while(result.next()) {
-	 * System.out.println(result.getString("account_name"));
-	 * 
-	 * if(!username.equals(result.getString("account_name"))) {
-	 * System.out.println("Account not found, please register a new one."); } else
-	 * if(!password.equals(result.getString("account_pass"))) {
-	 * System.out.println("Password does not match, please try again."); } else
-	 * if(username.equals(result.getString("account_name")) &&
-	 * password.equals(result.getString("account_pass")) ) { BankingMenu(); }else {
-	 * System.out.println("Errors occur"); }
-	 * 
-	 * 
-	 * }
-	 * 
-	 * } catch (SQLException e) { } return false; }
-	 */
-	private boolean ValidateCustomerLogin(String username, String password) {
-		String query ="select * from customer";
+	
+	private void CreateCtAccount(String fullName, String accountName, String accountPass) {
+		String autopk="Autopk1.nextval";
+		String insertQuery ="insert into customer values('"+fullName+"','"+accountName+"','"+accountPass+"',"+autopk+")";
 		CustomerDaoImp ctDao = new CustomerDaoImp();
-		ResultSet resultSet = ctDao.SelectAccount(conn, query);
-		try {
-			while(resultSet.next()) {
-				 if(!(username.equals(resultSet.getString("account_name"))|| password.equals(resultSet.getString("account_pass"))))
-				 	{
-					 return false;
-					} 
-				 else if(username.equals(resultSet.getString("account_name")) &&  password.equals(resultSet.getString("account_pass")) )
-				 	{
-					 return true;
-					}
-			}
-		} catch (SQLException e) {
+		ctDao.InsertCustomer(insertQuery);
+		switch(CustomerDaoImp.count) {
+		case 0:
+			System.out.println("   This account name already exists. Please choose another one ");
+			System.out.println("````````````````````````````````````````````````````````````````````");
+			break;
+		case 1:
+			System.out.println("     Account created successfully");
+			System.out.println("``````````````````````````````````");
+			break;
+		default:
+			break;
 		}
-		return false;
+		
 	}
+
 }
 
 //dwdaw//dwadwa

@@ -10,7 +10,7 @@ public abstract class Menus extends ValidateInput implements ScannerInput{
 	 * @return
 	 */
 	public String MainMenuDisplay() {
-		System.out.println("     WELCOME TO CONSOLE BANKING\n");
+		System.out.println("    *WELCOME TO CONSOLE BANKING*\n");
 		System.out.println("   ***********Main Menu***********\n");
 		System.out.println("         1. I'm a customer\n");
 		System.out.println("         2. I'm an employee\n");	
@@ -40,7 +40,7 @@ public abstract class Menus extends ValidateInput implements ScannerInput{
 	 * this method prompts for user input to sign up for new account
 	 * @return
 	 */
-	public Customer SignupMenuDisplay() {
+	public Customer SignupCustomerAccount() {
 		Customer ctSignup;
 		System.out.println("");
 		System.out.println("  **********Sign Up Menu**********\n");
@@ -64,10 +64,10 @@ public abstract class Menus extends ValidateInput implements ScannerInput{
 		Customer ctLogin;
 		System.out.println("");
 		System.out.println("  **********Log In Menu**********\n");
-		System.out.println("           Account Name:\n");
+		System.out.println("  What is your account name?\n");
 		String accountName = input.nextLine();
 		System.out.println("``````````````````````````````````");
-		System.out.println("           Password:");
+		System.out.println("  What is your password?");
 		String accountPass = input.nextLine();
 		System.out.println("````````````````````````````````");
 		ctLogin = new Customer(accountName, accountPass);
@@ -119,7 +119,7 @@ public abstract class Menus extends ValidateInput implements ScannerInput{
 	 * this method displays a menu for employee login
 	 * @return
 	 */
-	public String EmpLogin() {
+	public String EmpMenu() {
 		System.out.println("");
 		System.out.println("  **********Employee Menu**********\n");
 		System.out.println("        1. Employee Login\n");
@@ -130,10 +130,27 @@ public abstract class Menus extends ValidateInput implements ScannerInput{
 		return result;
 	}
 	/**
+	 * this method prompts user for login credential
+	 * @return
+	 */
+	public Employee EmpLogin() {
+		Employee ctLogin;
+		System.out.println("");
+		System.out.println("  **********Log In Menu**********\n");
+		System.out.println("    What is your employee account?\n");
+		String accountName = input.nextLine();
+		System.out.println("``````````````````````````````````");
+		System.out.println("    What is your password?");
+		String accountPass = input.nextLine();
+		System.out.println("````````````````````````````````");
+		ctLogin = new Employee(accountName, accountPass);
+		return ctLogin;
+	}
+	/**
 	 * this method diplays options after an employee is logged in
 	 * @return
 	 */
-	public String EmpMenu() {
+	public String EmpLoggedMenu() {
 		System.out.println("");
 		System.out.println("  **********Employee Menu**********\n");
 		System.out.println("       1. Arrpove Bank Accounts\n");
