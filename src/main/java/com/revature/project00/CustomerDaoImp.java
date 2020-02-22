@@ -7,6 +7,11 @@ import java.sql.SQLException;
 
 public class CustomerDaoImp implements CustomerDao{
 
+	/**
+	 * This class implements the customerDAO interface and completes the methods.
+	 * Both two methods takes a Connection object and a string query and executes
+	 * prepared statements.
+	 */
 	private  PreparedStatement preSt = null;
 	private  ResultSet resultSet = null;
 

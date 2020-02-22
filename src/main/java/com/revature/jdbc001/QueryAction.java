@@ -1,4 +1,4 @@
-package com.revature.project00;
+package com.revature.jdbc001;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

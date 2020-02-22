@@ -1,7 +1,12 @@
 package com.revature.project00;
 
 public class Customer {
-
+/**
+ * This is a POJO class for creating Customer Objects using DAO design Pattern and has two constructors
+ * First constructor takes 3 arguments and is used for customer account creations
+ * Second constructor takes 2 arguments, which are username and password and is used
+ * for login credentials
+ */
 	private String fullName;
 	private String username;
 	private String password;

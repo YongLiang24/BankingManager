@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class DBConnection {
 /**
- * Singleton design pattern connection object.
+ * Singleton design pattern for the connection object.
  */
 	private static DBConnection instanceObj;//declare instance of this class
 	private static Connection connect =null;
@@ -24,8 +24,8 @@ public class DBConnection {
 		if(connect == null) {
 			try {
 				String hostURL = "jdbc:oracle:thin:@localhost:1521:yong";
-				String username ="HR";
-				String password="HR";
+				String username ="yongliang";
+				String password="yl";
 				connect = DriverManager.getConnection(hostURL, username, password);
 			} catch (SQLException e) {
 			//e.printStackTrace();

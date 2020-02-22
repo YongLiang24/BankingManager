@@ -1,6 +1,6 @@
 package com.revature.project00;
 
-public abstract class ValidateInput implements ScannerInput{
+public abstract class ValidateInput  implements ScannerInput{
 	/**
 	 * This abstract class contains various validation methods to check against the user inputs from the Menu class.
 	 * The Menu class extends this abstract class.
@@ -38,7 +38,7 @@ public abstract class ValidateInput implements ScannerInput{
 	 void Validate4Options(String result) {
 		while(!(result.matches("1") || result.matches("2") || result.matches("3") || result.matches("4"))) {
 			System.out.println("Invalid input, please type a number from 1-4\n");
-			result = input.nextLine();
+			result = input.nextLine();			
 			System.out.println("``````````````````````````````````");
 		}
 	}
@@ -82,5 +82,7 @@ public abstract class ValidateInput implements ScannerInput{
 		}
 		return balance;
 	}
+
+
 
 }

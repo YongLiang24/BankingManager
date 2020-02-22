@@ -5,8 +5,11 @@ package com.revature.project00;
 public abstract class Menus extends ValidateInput implements ScannerInput{
 	
 
+	/**
+	 * This method displays the main menu options and prompts for user input.
+	 * @return
+	 */
 	public String MainMenuDisplay() {
-		System.out.println("");
 		System.out.println("     WELCOME TO CONSOLE BANKING\n");
 		System.out.println("   ***********Main Menu***********\n");
 		System.out.println("         1. I'm a customer\n");
@@ -17,7 +20,10 @@ public abstract class Menus extends ValidateInput implements ScannerInput{
 		this.Validate3Options(result);
 		return result;
 	}
-	
+	/**
+	 * This method displays customer menu and prompts for user input
+	 * @return
+	 */
 	public String CustomerMenuDisplay() {
 		System.out.println("");
 		System.out.println("  **********Customer Menu**********\n");
@@ -30,6 +36,10 @@ public abstract class Menus extends ValidateInput implements ScannerInput{
 		return result;
 	}
 	
+	/**
+	 * this method prompts for user input to sign up for new account
+	 * @return
+	 */
 	public Customer SignupMenuDisplay() {
 		Customer ctSignup;
 		System.out.println("");
@@ -46,7 +56,10 @@ public abstract class Menus extends ValidateInput implements ScannerInput{
 		ctSignup = new Customer(fullname, accountname, password);		
 		return ctSignup;
 	}
-	
+	/**
+	 * this method prompts user for login credential
+	 * @return
+	 */
 	public Customer CustomerLogin() {
 		Customer ctLogin;
 		System.out.println("");
@@ -60,7 +73,10 @@ public abstract class Menus extends ValidateInput implements ScannerInput{
 		ctLogin = new Customer(accountName, accountPass);
 		return ctLogin;
 	}
-	
+	/**
+	 * this method displays banking menu after user is logged in
+	 * @return
+	 */
 	public String BankingMenu() {
 		System.out.println("");
 		System.out.println("  **********Banking Menu**********\n");
@@ -77,7 +93,10 @@ public abstract class Menus extends ValidateInput implements ScannerInput{
 		
 		return result;
 	}
-	
+	/**
+	 * this method prompts user to create a new banking account
+	 * @return
+	 */
 	public BankAccount ApplyForAccount() {		
 		BankAccount bank;
 		System.out.println("");
@@ -96,7 +115,10 @@ public abstract class Menus extends ValidateInput implements ScannerInput{
 		bank = new BankAccount(bankAccountName, accountType, startingBalance);	
 		return bank;
 	}
-
+	/**
+	 * this method displays a menu for employee login
+	 * @return
+	 */
 	public String EmpLogin() {
 		System.out.println("");
 		System.out.println("  **********Employee Menu**********\n");
@@ -107,7 +129,10 @@ public abstract class Menus extends ValidateInput implements ScannerInput{
 		this.Validate2Options(result);
 		return result;
 	}
-	
+	/**
+	 * this method diplays options after an employee is logged in
+	 * @return
+	 */
 	public String EmpMenu() {
 		System.out.println("");
 		System.out.println("  **********Employee Menu**********\n");

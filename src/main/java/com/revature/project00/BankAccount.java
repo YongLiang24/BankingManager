@@ -2,7 +2,8 @@ package com.revature.project00;
 
 public class BankAccount {
 	/**
-	 * This is a POJO class that responsibles for creating BankAccount objects with attributes.
+	 * This is a POJO class for creating BankAccount objects at banking account creation.
+	 * The approvalStatus defaults with false and will become true once an account gets approved
 	 */
 	private String bankAccountName;
 	private String accountType;
