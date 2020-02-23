@@ -5,7 +5,8 @@ import java.sql.SQLException;
 
 public class BankingLogics extends Menus {	
 	boolean switchOn = true;
-
+	boolean isCtLogged = true;
+	boolean isEmpLogged =true;
 	public BankingLogics() {
 		super();
 		do {
@@ -17,6 +18,7 @@ public class BankingLogics extends Menus {
 	private void MainLogic(String result) {
 		switch (result) {
 		case "1":
+			isCtLogged =true;
 			String option = CustomerMenuDisplay();
 			switch (option) {
 			case "1":
@@ -34,6 +36,7 @@ public class BankingLogics extends Menus {
 			}
 			break;
 		case "2":
+			isEmpLogged = true;
 			Employee emp = EmpLogin();
 			ValidLoginEmp(emp.getEmpUsername(), emp.getEmpPassword());
 			break;
@@ -101,12 +104,13 @@ public class BankingLogics extends Menus {
 				  System.out.println("     login success");
 				  System.out.println("````````````````````");
 				  System.out.println("            Greeting "+result.getString("full_name"));
-				  String ctOption =BankingMenu();
+				  while(isCtLogged) {
+				  String ctOption =BankingMenu();				 
 				  int ctId = result.getInt("customer_id");
 				  switch(ctOption) {
 				  case"1":
 					  BankAccount bk =ApplyForAccount();
-					  CreateBkAccount(ctId,bk.getBankAccountName(), bk.getBalance(), bk.getAccountType());				  
+					  CreateBkAccount(ctId,bk.getBankAccountName(), bk.getBalance(), bk.getAccountType());					  
 					  break;
 				  case "2":
 					  break;
@@ -117,8 +121,10 @@ public class BankingLogics extends Menus {
 				  case "5":
 					  break;
 				  case "6":
+					  isCtLogged=false;
 					  break;
 				  default: break;
+				  }
 				  }
 			  }
 		  }; 
@@ -140,8 +146,25 @@ public class BankingLogics extends Menus {
 		  
 		  try { while(result.next()) {
 			  if(username.equals(result.getString("account_name")) &&  userpass.equals(result.getString("account_pass"))) {
-				  System.out.println("     login success");
-				  EmpLoggedMenu();
+				  System.out.println("           login success");
+				  while(isEmpLogged) {
+				  String empOption = EmpLoggedMenu();
+				  switch(empOption) {
+				  case"1":
+					  System.out.println("**************Pending Accounts**************\n");
+					  ApproveAccounts();
+					  
+					  break;
+				  case"2":
+					  break;
+				  case"3":
+					  break;
+				  case"4":
+					  isEmpLogged = false;
+					  break;
+				  default:break;
+				  }
+			  }
 			  }
 		  }; 
 		  System.out.println("  Account name or password does not match");
@@ -150,6 +173,26 @@ public class BankingLogics extends Menus {
 			  (SQLException e) { 
 				  e.printStackTrace(); 
 				  }
+	}
+	
+	void ApproveAccounts() {
+		String allAccountQuery ="Select * from accounts";
+		CustomerDaoImp ctDao = new CustomerDaoImp();
+		ResultSet result =ctDao.SelectAccount(allAccountQuery);
+		try {
+			while(result.next()) {
+				if(result.getString(6).equals("false"))
+				System.out.println("CustomerID: "+result.getInt(1)+" | AccountID: "+result.getInt(2)+" | AccountName: "+result.getString(3) + " | Balance: "+result.getDouble(4)+" | Type:"+result.getString(5)+" | Status: "+result.getString(6)+"\n");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println("Please enter an AccountID to change the status and approve the account.");
+		String empInput = input.nextLine();
+		String updateStatusQuery="update Accounts set status='true' where account_id ="+empInput;
+		CustomerDaoImp ctDao1 = new CustomerDaoImp();
+		ctDao.InsertCustomer(updateStatusQuery);
 	}
 
 	

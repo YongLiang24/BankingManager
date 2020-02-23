@@ -4,7 +4,7 @@ package com.revature.project00;
 
 public abstract class Menus extends ValidateInput implements ScannerInput{
 	
-
+	
 	/**
 	 * This method displays the main menu options and prompts for user input.
 	 * @return
@@ -88,8 +88,7 @@ public abstract class Menus extends ValidateInput implements ScannerInput{
 		System.out.println("    6. Sign Out");
 		String result = input.nextLine();	
 		System.out.println("``````````````````````````````````");
-		this.Validate7Options(result);
-		
+		this.Validate7Options(result);	
 		return result;
 	}
 	/**
