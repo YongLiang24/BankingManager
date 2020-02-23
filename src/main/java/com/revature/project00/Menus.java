@@ -80,13 +80,12 @@ public abstract class Menus extends ValidateInput implements ScannerInput{
 	public String BankingMenu() {
 		System.out.println("");
 		System.out.println("  **********Banking Menu**********\n");
-		System.out.println("       1. Apply for Bank Account");
-		System.out.println("       2. View Account Balance");	
+		System.out.println("       1. Apply for Bank Account\n");
+		System.out.println("       2. View Account Balance\n");	
 		System.out.print("       3. Withdraw");
-		System.out.println("    4. Deposite");
+		System.out.println("    4. Deposite\n");
 		System.out.print("       5. Transfer");
-		System.out.println("    6. Notification");
-		System.out.println("       7. Sign Out");
+		System.out.println("    6. Sign Out");
 		String result = input.nextLine();	
 		System.out.println("``````````````````````````````````");
 		this.Validate7Options(result);
@@ -101,7 +100,7 @@ public abstract class Menus extends ValidateInput implements ScannerInput{
 		BankAccount bank;
 		System.out.println("");
 		System.out.println("  **********Apply for Banking Account**********\n");
-		System.out.println("       Create a name for your banking account:");
+		System.out.println("       Please create a name for your banking account:");
 		String bankAccountName = input.nextLine();
 		System.out.println("``````````````````````````````````");
 		System.out.println("Choose an account type:\n");
@@ -111,8 +110,21 @@ public abstract class Menus extends ValidateInput implements ScannerInput{
 		String accountType = input.nextLine();
 		System.out.println("``````````````````````````````````");
 		this.Validate3Options(accountType);	
+		String type = accountType;
+		switch(type) {
+		case "1":
+			type = "Checking";
+			break;
+		case"2":
+			type="Saving";
+			break;
+		case"3":
+			type="Investment";
+			break;
+			default:break;
+		}
 		double startingBalance = this.ValidateBalance();
-		bank = new BankAccount(bankAccountName, accountType, startingBalance);	
+		bank = new BankAccount(bankAccountName, type, startingBalance);	
 		return bank;
 	}
 	/**

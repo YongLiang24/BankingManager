@@ -1,6 +1,5 @@
 package com.revature.project00;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -69,6 +68,27 @@ public class BankingLogics extends Menus {
 		
 	}
 	
+	private void CreateBkAccount(int customerId,String accountName, double accountBalance, String accountType ) {
+		String autopk="Autopk1.nextval";
+		String status ="false";
+		String insertQuery ="insert into accounts values('"+customerId+"',"+autopk+",'"+accountName+"',"+accountBalance+",'"+accountType+"','"+status+"')";
+		CustomerDaoImp ctDao = new CustomerDaoImp();
+		ctDao.InsertCustomer(insertQuery);
+		switch(CustomerDaoImp.count) {
+		case 0:
+			System.out.println("   Error occurred, account was not created ");
+			System.out.println("`````````````````````````````````````````````");
+			break;
+		case 1:
+			System.out.println("     Bank account created successfully, approve from the bank is required before using");
+			System.out.println("``````````````````````````````````");
+			break;
+		default:
+			break;
+		}
+		
+	}
+	
 	public void ValidLoginCt(String username, String userpass) {
 		  String query ="select * from Customer";
 	  
@@ -80,11 +100,30 @@ public class BankingLogics extends Menus {
 			  if(username.equals(result.getString("account_name")) &&  userpass.equals(result.getString("account_pass"))) {
 				  System.out.println("     login success");
 				  System.out.println("````````````````````");
-				  BankingMenu();
+				  System.out.println("            Greeting "+result.getString("full_name"));
+				  String ctOption =BankingMenu();
+				  int ctId = result.getInt("customer_id");
+				  switch(ctOption) {
+				  case"1":
+					  BankAccount bk =ApplyForAccount();
+					  CreateBkAccount(ctId,bk.getBankAccountName(), bk.getBalance(), bk.getAccountType());				  
+					  break;
+				  case "2":
+					  break;
+				  case"3":
+					  break;
+				  case "4":
+					  break;
+				  case "5":
+					  break;
+				  case "6":
+					  break;
+				  default: break;
+				  }
 			  }
 		  }; 
-		  System.out.println("   Account name or password does not match");
-		  System.out.println("````````````````````````````````````````````");
+//		  System.out.println("   Account name or password does not match");
+//		  System.out.println("````````````````````````````````````````````");
 			  } 
 			  catch
 			  (SQLException e) { 
@@ -113,6 +152,7 @@ public class BankingLogics extends Menus {
 				  }
 	}
 
+	
 }
 
 //dwdaw//dwadwa
