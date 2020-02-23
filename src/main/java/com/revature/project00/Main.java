@@ -51,19 +51,23 @@ public class Main {
 
 		
 		
-		/*
-		 * Connection conn = DBConnection.getInstance().getConnect();
-		 * 
-		 * String query ="select account_name from Customer";
-		 * 
-		 * CustomerDaoImp ctDao = new CustomerDaoImp();
-		 * 
-		 * ResultSet result =ctDao.SelectAccount(conn, query);
-		 * 
-		 * try { while(result.next()) {
-		 * System.out.println(result.getString("account_name")); } conn.close(); } catch
-		 * (SQLException e) { e.printStackTrace(); }
-		 */
+		
+		 // Connection conn = DBConnection.getInstance().getConnect();
+		  
+//		  String query ="select account_name from Customer";
+//		  
+//		  CustomerDaoImp ctDao = new CustomerDaoImp();
+//		  
+//		  ResultSet result =ctDao.SelectAccount(query);
+//		  
+//		  try { while(result.next()) {
+//		  System.out.println(result.getString("account_name")); }; 
+//		  } 
+//		  catch
+//		  (SQLException e) { 
+//			  e.printStackTrace(); 
+//			  }
+		 
 		 
 		 
 

@@ -85,6 +85,7 @@ public abstract class ValidateInput  implements ScannerInput{
 			}
 		}
 		return balance;
+	 
 	}
 	 
 		/**
@@ -93,28 +94,34 @@ public abstract class ValidateInput  implements ScannerInput{
 		 * @param password
 		 * @return
 		 */
-		protected boolean ValidateLogin(String username, String password, String query) {		
-			CustomerDaoImp ctDao = new CustomerDaoImp();
-			ResultSet resultSet = ctDao.SelectAccount(query);
-			try {
-				while(resultSet.next()) {
-				 if(!(username.equals(resultSet.getString("account_name"))|| password.equals(resultSet.getString("account_pass"))))
-				 	{
-						System.out.println("****************************************************");
-						System.out.println("  Incorrect username or password. Please try again ");
-						System.out.println("****************************************************");
-						return false;
-					} 
-				 else if(username.equals(resultSet.getString("account_name")) &&  password.equals(resultSet.getString("account_pass")) )
-				 	{
-						System.out.println("         ***************");
-						System.out.println("           Login Success ");
-						System.out.println("         ***************");
-						return true;
-					}
-				}
-			} catch (SQLException e) {
-			}
-			return false;
-		}
+//		protected boolean ValidateLogin(String username, String password, String query) {		
+//			CustomerDaoImp ctDao = new CustomerDaoImp();
+//			ResultSet resultSet = ctDao.SelectAccount(query);
+//			try {
+//
+//				System.out.println(ctDao.SelectAccounts(query).getString(1));
+//				while(resultSet.next()) {
+//				 if(!(username.equals(resultSet.getString("account_name"))|| password.equals(resultSet.getString("account_pass"))))
+//				 	{
+//						System.out.println("****************************************************");
+//						System.out.println("  Incorrect username or password. Please try again ");
+//						System.out.println("****************************************************");
+//						
+//						return false;
+//					} 
+//				 else if(username.equals(resultSet.getString("account_name")) &&  password.equals(resultSet.getString("account_pass")) )
+//				 	{
+//						System.out.println("         ***************");
+//						System.out.println("           Login Success ");
+//						System.out.println("         ***************");
+//					
+//						return true;
+//					}
+//				}
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			}
+//			return false;
+//		}
+
 }

@@ -12,33 +12,36 @@ public class CustomerDaoImp implements CustomerDao{
 	 * Both two methods takes a Connection object and a string query and executes
 	 * prepared statements.
 	 */
-	private  PreparedStatement preSt = null;
-	private  ResultSet resultSet = null;
 
-	Connection conn = DBConnection.getInstance().getConnect();
 	public static int count =0;
 
 	@Override
 	public void InsertCustomer(String query) {
-		
+
+		Connection conn = DBConnection.getInstance().getConnect();
+		PreparedStatement preSt=null;
 		try {
 			preSt=conn.prepareStatement(query);
-			count =preSt.executeUpdate();//count returns 1 when insert successfully
+			count =preSt.executeUpdate();//count returns 1 when insert successfully	
 		} catch (SQLException e) {
-			count =0;//count returns 0 when insert fails
 		}
 	}
-
 	@Override
 	public ResultSet SelectAccount(String query) {
+		ResultSet tempResult=null;
+		PreparedStatement preSt=null;
+		ResultSet resultSet=null;
+		Connection conn = DBConnection.getInstance().getConnect();
 		try {
 			preSt=conn.prepareStatement(query);
 			resultSet = preSt.executeQuery();
+			tempResult = resultSet;
+			resultSet =null;
+			System.out.println(tempResult.getString(1));
+			conn.close();
 		} catch (SQLException e) {
 		
 		}
-		return resultSet;
+		return tempResult;
 	}
-
-
 }

@@ -1,6 +1,8 @@
 package com.revature.project00;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class BankingLogics extends Menus {	
 	boolean switchOn = true;
@@ -20,10 +22,7 @@ public class BankingLogics extends Menus {
 			switch (option) {
 			case "1":
 				Customer ct = CustomerLogin();
-				String ctQuery ="select * from customer";
-				if(ValidateLogin(ct.getUsername(), ct.getPassword(), ctQuery)) {			
-					BankingMenu();					
-				}
+				ValidLoginCt(ct.getUsername(), ct.getPassword());
 				break;
 			case "2":
 				Customer ct1 = SignupCustomerAccount();
@@ -37,11 +36,7 @@ public class BankingLogics extends Menus {
 			break;
 		case "2":
 			Employee emp = EmpLogin();
-			System.out.println(emp.getEmpUsername() + "///"+emp.getEmpPassword());
-			String empQuery="select * from employee";
-			if(ValidateLogin(emp.getEmpUsername(), emp.getEmpPassword(), empQuery)) {
-				EmpLoggedMenu();				
-			}
+			ValidLoginEmp(emp.getEmpUsername(), emp.getEmpPassword());
 			break;
 		case "3":
 			System.out.println("Program Terminated");
@@ -72,6 +67,50 @@ public class BankingLogics extends Menus {
 			break;
 		}
 		
+	}
+	
+	public void ValidLoginCt(String username, String userpass) {
+		  String query ="select * from Customer";
+	  
+		  CustomerDaoImp ctDao = new CustomerDaoImp();
+		  
+		  ResultSet result =ctDao.SelectAccount(query);
+		  
+		  try { while(result.next()) {
+			  if(username.equals(result.getString("account_name")) &&  userpass.equals(result.getString("account_pass"))) {
+				  System.out.println("     login success");
+				  System.out.println("````````````````````");
+				  BankingMenu();
+			  }
+		  }; 
+		  System.out.println("   Account name or password does not match");
+		  System.out.println("````````````````````````````````````````````");
+			  } 
+			  catch
+			  (SQLException e) { 
+				  e.printStackTrace(); 
+				  }
+	}
+	
+	public void ValidLoginEmp(String username, String userpass) {
+		  String query ="select * from Employee";
+	  
+		  CustomerDaoImp ctDao = new CustomerDaoImp();
+		  
+		  ResultSet result =ctDao.SelectAccount(query);
+		  
+		  try { while(result.next()) {
+			  if(username.equals(result.getString("account_name")) &&  userpass.equals(result.getString("account_pass"))) {
+				  System.out.println("     login success");
+				  EmpLoggedMenu();
+			  }
+		  }; 
+		  System.out.println("  Account name or password does not match");
+			  } 
+			  catch
+			  (SQLException e) { 
+				  e.printStackTrace(); 
+				  }
 	}
 
 }
