@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public abstract class ValidateInput  implements ScannerInput{
+public abstract class ValidateInput implements ScannerInput{
 	/**
 	 * This abstract class contains various validation methods to check against the user inputs from the Menu class.
 	 * The Menu class extends this abstract class.
@@ -92,6 +92,29 @@ public abstract class ValidateInput  implements ScannerInput{
 		double balance =-1;		
 		while(balance <0) {
 			System.out.println("      Please enter the amount to withdraw: ");
+			String balanceString = input.nextLine();
+			System.out.println("``````````````````````````````````");
+			try {
+			balance = Double.parseDouble(balanceString);		
+			if(balance <1) {
+				System.out.println("      The amount can not be less than 1");
+				balance = -1;
+				}		
+			}
+			catch(NumberFormatException e) {
+				System.out.println("Invalid non-numeric input, please try again.");
+				balance =-1;
+			}
+		}
+		return balance;
+	 
+	}
+	 
+	 protected double ValidateDepositeAmount() {
+			
+		double balance =-1;		
+		while(balance <0) {
+			System.out.println("      Please enter the amount to deposite: ");
 			String balanceString = input.nextLine();
 			System.out.println("``````````````````````````````````");
 			try {

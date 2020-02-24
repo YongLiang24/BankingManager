@@ -117,8 +117,10 @@ public class BankingLogics extends Menus {
 					  AccountWithdraw(ctId);
 					  break;
 				  case "4":
+					  AccountDeposite(ctId);
 					  break;
 				  case "5":
+					  AccountTransfer(ctId);
 					  break;
 				  case "6":
 					  isCtLogged=false;
@@ -173,7 +175,7 @@ public class BankingLogics extends Menus {
 				  }
 	}
 	
-	private void ApproveAccounts() {
+	void ApproveAccounts() {
 		String allAccountQuery ="Select * from accounts";
 		CustomerDaoImp ctDao = new CustomerDaoImp();
 		ResultSet result =ctDao.SelectAccount(allAccountQuery);
@@ -200,7 +202,7 @@ public class BankingLogics extends Menus {
 		}
 	}
 	
-	private void EmpViewAccounts() {
+	void EmpViewAccounts() {
 		String trueAccountsQuery = "select full_name, bkaccount_name, Balance, account_type from customer inner join accounts using (customer_id) order by full_name";
 		CustomerDaoImp ctDao = new CustomerDaoImp();
 		ResultSet result=ctDao.SelectAccount(trueAccountsQuery);
@@ -214,7 +216,7 @@ public class BankingLogics extends Menus {
 		}
 	}
 	
-	private void ViewAccountBalance(int customerId) {
+	void ViewAccountBalance(int customerId) {
 		String viewBalanceQuery="select account_id, bkaccount_name, Balance, account_type, status from customer inner join accounts using (customer_id) where customer_id="+customerId;
 		CustomerDaoImp ctDao = new CustomerDaoImp();
 		ResultSet result = ctDao.SelectAccount(viewBalanceQuery);
@@ -262,7 +264,7 @@ public class BankingLogics extends Menus {
 					CustomerDaoImp ctDao1 = new CustomerDaoImp();
 					ctDao1.InsertCustomer(updateBalQuery);
 					System.out.println("$"+withdrawAmount+" has been withdrawn from account with id: "+result2.getInt(1)+"\n");	
-					System.out.println("The new balance is $"+difference);
+					System.out.println("The new balance is now $"+difference);
 					System.out.println("````````````````````````````````````````````````````````````````````````");
 				}
 			}
@@ -276,7 +278,66 @@ public class BankingLogics extends Menus {
 	}
 	
 	
+	void AccountDeposite(int customerId) {
+		String viewBalanceQuery="select account_id, bkaccount_name, Balance, account_type, status from customer inner join accounts using (customer_id) where customer_id="+customerId;
+		CustomerDaoImp ctDao = new CustomerDaoImp();
+		ResultSet result = ctDao.SelectAccount(viewBalanceQuery);
+		try {
+			System.out.println("************Deposite**********\n");
+			while(result.next()) {
+				if(result.getString("status").equals("true"))
+				System.out.println("Account ID: "+result.getString(1)+" | Account Name: " +result.getString(2)+" | Balance: "+result.getDouble(3)+" | Type: "+result.getString(4)+"\n");
+			}		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	//implements userInput and performs the deposite calculation
+		
+		int accId=ValidateAccountId();
+		double depositeAmount = ValidateDepositeAmount();
+		double sum;
+		boolean isWithdrawValid = true;
+		ResultSet result2 = ctDao.SelectAccount(viewBalanceQuery);
+		try {
+			while(result2.next()) {
+				if(result2.getInt(1)==accId && result2.getString("status").equals("true")) {
+					isWithdrawValid = false;
+					sum = result2.getDouble(3) + depositeAmount;				
+					String updateBalQuery="update accounts set balance="+sum+"where account_id="+result2.getInt(1);
+					CustomerDaoImp ctDao1 = new CustomerDaoImp();
+					ctDao1.InsertCustomer(updateBalQuery);
+					System.out.println("$"+depositeAmount+" has been deposited to account with id: "+result2.getInt(1)+"\n");	
+					System.out.println("The new balance is now $"+sum);
+					System.out.println("````````````````````````````````````````````````````````````````````````");
+				}
+			}
+			if(isWithdrawValid) {
+				System.out.println("      The Transaction has been cancelled due to account mismatch\n");
+				System.out.println("`````````````````````````````````````````````````````````````````");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
+	}
 	
+	void AccountTransfer(int customerId) {
+		String viewCustomerQuery="select full_name, account_name,customer_id from customer order by full_name";
+		CustomerDaoImp ctDao = new CustomerDaoImp();
+		ResultSet result = ctDao.SelectAccount(viewCustomerQuery);
+		try {
+			System.out.println("************Transfer**********\n");
+			while(result.next()) {
+				System.out.println("Customer name: "+result.getString(1)+" | Account Name: " +result.getString(2)+" | Customer Id:"+result.getInt(3)+"\n");
+			}		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+	}
+		
 }
 
 
