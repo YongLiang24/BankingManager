@@ -12,13 +12,13 @@ public class CustomerDaoImp implements CustomerDao{
 	 * Both two methods takes a Connection object and a string query and executes
 	 * prepared statements.
 	 */
-
+	Connection conn = DBConnection.getInstance().getConnect();
 	public static int count =0;
 
 	@Override
 	public void InsertCustomer(String query) {
 
-		Connection conn = DBConnection.getInstance().getConnect();
+		
 		PreparedStatement preSt=null;
 		try {
 			preSt=conn.prepareStatement(query);
@@ -31,13 +31,12 @@ public class CustomerDaoImp implements CustomerDao{
 		ResultSet tempResult=null;
 		PreparedStatement preSt=null;
 		ResultSet resultSet=null;
-		Connection conn = DBConnection.getInstance().getConnect();
 		try {
 			preSt=conn.prepareStatement(query);
 			resultSet = preSt.executeQuery();
 			tempResult = resultSet;
 			resultSet =null;
-			System.out.println(tempResult.getString(1));
+			tempResult.getString(1);
 			conn.close();
 		} catch (SQLException e) {
 		

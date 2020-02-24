@@ -92,11 +92,9 @@ public class BankingLogics extends Menus {
 		
 	}
 	
-	public void ValidLoginCt(String username, String userpass) {
-		  String query ="select * from Customer";
-	  
-		  CustomerDaoImp ctDao = new CustomerDaoImp();
-		  
+	private void ValidLoginCt(String username, String userpass) {
+		  String query ="select * from Customer";  
+		  CustomerDaoImp ctDao = new CustomerDaoImp();	  
 		  ResultSet result =ctDao.SelectAccount(query);
 		  
 		  try { while(result.next()) {
@@ -113,8 +111,10 @@ public class BankingLogics extends Menus {
 					  CreateBkAccount(ctId,bk.getBankAccountName(), bk.getBalance(), bk.getAccountType());					  
 					  break;
 				  case "2":
+					  ViewAccountBalance(ctId);
 					  break;
 				  case"3":
+					  AccountWithdraw(ctId);
 					  break;
 				  case "4":
 					  break;
@@ -137,13 +137,10 @@ public class BankingLogics extends Menus {
 				  }
 	}
 	
-	public void ValidLoginEmp(String username, String userpass) {
-		  String query ="select * from Employee";
-	  
-		  CustomerDaoImp ctDao = new CustomerDaoImp();
-		  
-		  ResultSet result =ctDao.SelectAccount(query);
-		  
+	private void ValidLoginEmp(String username, String userpass) {
+		  String query ="select * from Employee";  
+		  CustomerDaoImp ctDao = new CustomerDaoImp();		  
+		  ResultSet result =ctDao.SelectAccount(query);		  
 		  try { while(result.next()) {
 			  if(username.equals(result.getString("account_name")) &&  userpass.equals(result.getString("account_pass"))) {
 				  System.out.println("           login success");
@@ -152,13 +149,13 @@ public class BankingLogics extends Menus {
 				  switch(empOption) {
 				  case"1":
 					  System.out.println("**************Pending Accounts**************\n");
-					  ApproveAccounts();
-					  
+					  ApproveAccounts();				  
 					  break;
 				  case"2":
 					  EmpViewAccounts();
 					  break;
 				  case"3":
+					  //View Logs, yet to implement
 					  break;
 				  case"4":
 					  isEmpLogged = false;
@@ -176,7 +173,7 @@ public class BankingLogics extends Menus {
 				  }
 	}
 	
-	void ApproveAccounts() {
+	private void ApproveAccounts() {
 		String allAccountQuery ="Select * from accounts";
 		CustomerDaoImp ctDao = new CustomerDaoImp();
 		ResultSet result =ctDao.SelectAccount(allAccountQuery);
@@ -203,19 +200,82 @@ public class BankingLogics extends Menus {
 		}
 	}
 	
-	void EmpViewAccounts() {
-		String TrueAccountsQuery = "select full_name, bkaccount_name, Balance, account_type from customer inner join accounts using (customer_id) order by full_name";
+	private void EmpViewAccounts() {
+		String trueAccountsQuery = "select full_name, bkaccount_name, Balance, account_type from customer inner join accounts using (customer_id) order by full_name";
 		CustomerDaoImp ctDao = new CustomerDaoImp();
-		ResultSet result=ctDao.SelectAccount(TrueAccountsQuery);
+		ResultSet result=ctDao.SelectAccount(trueAccountsQuery);
 		try {
 			while(result.next()) {
+				if(result.getString("status").equals("true"))
 				System.out.println("Name: "+result.getString(1)+" | Account: "+result.getString(2)+" | Balance: $"+result.getDouble(3) + " | Type: "+result.getString(4)+"\n");
-
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
+	
+	private void ViewAccountBalance(int customerId) {
+		String viewBalanceQuery="select account_id, bkaccount_name, Balance, account_type, status from customer inner join accounts using (customer_id) where customer_id="+customerId;
+		CustomerDaoImp ctDao = new CustomerDaoImp();
+		ResultSet result = ctDao.SelectAccount(viewBalanceQuery);
+		try {
+				System.out.println("************My Accounts**********\n");
+			while(result.next()) {	
+				if(result.getString(5).equals("true"))
+				System.out.println("Account: "+result.getString(2)+" | Balance: "+result.getDouble(3)+" | Type: "+result.getString(4)+"\n");
+			}
+				System.out.println("*********************************");
+				System.out.println("    Enter any keys to go back");
+				input.nextLine();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	void AccountWithdraw(int customerId) {
+		String viewBalanceQuery="select account_id, bkaccount_name, Balance, account_type, status from customer inner join accounts using (customer_id) where customer_id="+customerId;
+		CustomerDaoImp ctDao = new CustomerDaoImp();
+		ResultSet result = ctDao.SelectAccount(viewBalanceQuery);
+		boolean isWithdrawValid = true;
+		try {
+			System.out.println("************Withdrawal**********\n");
+			while(result.next()) {
+				if(result.getString("status").equals("true"))
+				System.out.println("Account ID: "+result.getString(1)+" | Account Name: " +result.getString(2)+" | Balance: "+result.getDouble(3)+" | Type: "+result.getString(4)+"\n");
+			}		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		int accId = ValidateAccountId();
+		double withdrawAmount = ValidateWithdrawAmount();
+		double difference;
+
+		ResultSet result2 = ctDao.SelectAccount(viewBalanceQuery);
+		try {
+			while(result2.next()) {
+				if(result2.getInt(1)==accId && result2.getDouble(3)>=withdrawAmount && result2.getString("status").equals("true")) {
+					isWithdrawValid = false;
+					difference = result2.getDouble(3)- withdrawAmount;
+					
+					String updateBalQuery="update accounts set balance="+difference+"where account_id="+result2.getInt(1);
+					CustomerDaoImp ctDao1 = new CustomerDaoImp();
+					ctDao1.InsertCustomer(updateBalQuery);
+					System.out.println("$"+withdrawAmount+" has been withdrawn from account with id: "+result2.getInt(1)+"\n");	
+					System.out.println("The new balance is $"+difference);
+					System.out.println("````````````````````````````````````````````````````````````````````````");
+				}
+			}
+			if(isWithdrawValid) {
+				System.out.println("      The Transaction has been cancelled due to account mismatch\n");
+				System.out.println("`````````````````````````````````````````````````````````````````");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
 	
 }
 

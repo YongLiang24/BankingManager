@@ -53,8 +53,8 @@ public abstract class ValidateInput  implements ScannerInput{
 	  */
 	 protected void Validate7Options(String result) {
 		while(!(result.matches("1") || result.matches("2") || result.matches("3") || result.matches("4") 
-				|| result.matches("5") || result.matches("6") || result.matches("7"))){
-			System.out.println("Invalid input, please type a number from 1-7\n");
+				|| result.matches("5") || result.matches("6"))){
+			System.out.println("Invalid input, please type a number from 1-6\n");
 			result = input.nextLine();
 			System.out.println("``````````````````````````````````");
 		}
@@ -85,6 +85,50 @@ public abstract class ValidateInput  implements ScannerInput{
 			}
 		}
 		return balance;
+	 
+	}
+	 protected double ValidateWithdrawAmount() {
+			
+		double balance =-1;		
+		while(balance <0) {
+			System.out.println("      Please enter the amount to withdraw: ");
+			String balanceString = input.nextLine();
+			System.out.println("``````````````````````````````````");
+			try {
+			balance = Double.parseDouble(balanceString);		
+			if(balance <1) {
+				System.out.println("      The amount can not be less than 1");
+				balance = -1;
+				}		
+			}
+			catch(NumberFormatException e) {
+				System.out.println("Invalid non-numeric input, please try again.");
+				balance =-1;
+			}
+		}
+		return balance;
+	 
+	}
+	 protected int ValidateAccountId() {
+			
+		int accountId =-1;		
+		while(accountId <0) {
+			System.out.println("      Please enter an account Id to select the account ");
+			String balanceString = input.nextLine();
+			System.out.println("``````````````````````````````````");
+			try {
+			accountId = Integer.parseInt(balanceString);		
+			if(accountId <1) {
+				System.out.println("Invalid ID, try again");
+				accountId = -1;
+				}		
+			}
+			catch(NumberFormatException e) {
+				System.out.println("Invalid non-numeric input, please try again.");
+				accountId =-1;
+			}
+		}
+		return accountId;
 	 
 	}
 	 
