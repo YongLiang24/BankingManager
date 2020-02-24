@@ -156,6 +156,7 @@ public class BankingLogics extends Menus {
 					  
 					  break;
 				  case"2":
+					  EmpViewAccounts();
 					  break;
 				  case"3":
 					  break;
@@ -193,9 +194,29 @@ public class BankingLogics extends Menus {
 		String updateStatusQuery="update Accounts set status='true' where account_id ="+empInput;
 		CustomerDaoImp ctDao1 = new CustomerDaoImp();
 		ctDao.InsertCustomer(updateStatusQuery);
+		if(CustomerDaoImp.count ==1) {
+			System.out.println("     Account Approved Successfully");
+			System.out.println("````````````````````````````````````");
+		}else {
+			System.out.println("     Incorrect Account ID, Try again");
+			System.out.println("`````````````````````````````````````");
+		}
 	}
+	
+	void EmpViewAccounts() {
+		String TrueAccountsQuery = "select full_name, bkaccount_name, Balance, account_type from customer inner join accounts using (customer_id) order by full_name";
+		CustomerDaoImp ctDao = new CustomerDaoImp();
+		ResultSet result=ctDao.SelectAccount(TrueAccountsQuery);
+		try {
+			while(result.next()) {
+				System.out.println("Name: "+result.getString(1)+" | Account: "+result.getString(2)+" | Balance: $"+result.getDouble(3) + " | Type: "+result.getString(4)+"\n");
 
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	
 }
 
-//dwdaw//dwadwa
+
