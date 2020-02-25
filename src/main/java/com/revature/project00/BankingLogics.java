@@ -20,16 +20,19 @@ public class BankingLogics extends Menus {
 	private void MainLogic(String result) {
 		switch (result) {
 		case "1":
+
 			isCtLogged =true;
 			String option = CustomerMenuDisplay();
 			switch (option) {
 			case "1":
 				Customer ct = CustomerLogin();
 				ValidLoginCt(ct.getUsername(), ct.getPassword());
+				logger.info("A customer logged in the transaction log");
 				break;
 			case "2":
 				Customer ct1 = SignupCustomerAccount();
 				CreateCtAccount(ct1.getFullName(),ct1.getUsername(),ct1.getPassword());
+				logger.info("Customer create an account");
 				break;
 			case "3":
 				break;
@@ -41,6 +44,7 @@ public class BankingLogics extends Menus {
 			isEmpLogged = true;
 			Employee emp = EmpLogin();
 			ValidLoginEmp(emp.getEmpUsername(), emp.getEmpPassword());
+			logger.info("An employee signed in");
 			break;
 		case "3":
 			System.out.println("Program Terminated");
@@ -112,19 +116,24 @@ public class BankingLogics extends Menus {
 				  switch(ctOption) {
 				  case"1":
 					  BankAccount bk =ApplyForAccount();
-					  CreateBkAccount(ctId,bk.getBankAccountName(), bk.getBalance(), bk.getAccountType());					  
+					  CreateBkAccount(ctId,bk.getBankAccountName(), bk.getBalance(), bk.getAccountType());
+					  logger.info("customer  created a banking account");
 					  break;
 				  case "2":
 					  ViewAccountBalance(ctId);
+					  logger.info("customer viewd balance");
 					  break;
 				  case"3":
 					  AccountWithdraw(ctId);
+					  logger.info("customer withdraw balance");
 					  break;
 				  case "4":
 					  AccountDeposite(ctId);
+					  logger.info("customer made a deposite");
 					  break;
 				  case "5":
 					  AccountTransfer(ctId);
+					  logger.info("customer made a transfer");
 					  break;
 				  case "6":
 					  isCtLogged=false;
@@ -159,10 +168,12 @@ public class BankingLogics extends Menus {
 				  switch(empOption) {
 				  case"1":
 					  System.out.println("**************Pending Accounts**************\n");
-					  ApproveAccounts();				  
+					  ApproveAccounts();	
+					  logger.info("An employee approves an account");
 					  break;
 				  case"2":
 					  EmpViewAccounts();
+					  logger.info("an employee views all bank accounts");
 					  break;
 				  case"3":
 					  displayTfLogs();
