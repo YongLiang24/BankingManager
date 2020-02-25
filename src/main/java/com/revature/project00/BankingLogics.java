@@ -85,7 +85,7 @@ public class BankingLogics extends Menus {
 			System.out.println("`````````````````````````````````````````````");
 			break;
 		case 1:
-			System.out.println("     Bank account created successfully, approve from the bank is required before using");
+			System.out.println("     Bank account created successfully, approval from the bank is required before using");
 			System.out.println("``````````````````````````````````");
 			break;
 		default:
@@ -98,15 +98,17 @@ public class BankingLogics extends Menus {
 		  String query ="select * from Customer";  
 		  CustomerDaoImp ctDao = new CustomerDaoImp();	  
 		  ResultSet result =ctDao.SelectAccount(query);
+		  boolean isCtLogged=false;
 		  
 		  try { while(result.next()) {
 			  if(username.equals(result.getString("account_name")) &&  userpass.equals(result.getString("account_pass"))) {
 				  System.out.println("     login success");
 				  System.out.println("````````````````````");
-				  System.out.println("            Greeting "+result.getString("full_name"));
-				  while(isCtLogged) {
-				  String ctOption =BankingMenu();				 
+				  System.out.println("        Greeting "+result.getString("full_name"));
+				  isCtLogged = true;					 
 				  int ctId = result.getInt("customer_id");
+				  while(isCtLogged) {
+				  String ctOption =BankingMenu();			
 				  switch(ctOption) {
 				  case"1":
 					  BankAccount bk =ApplyForAccount();
@@ -131,7 +133,11 @@ public class BankingLogics extends Menus {
 				  }
 				  }
 			  }
-		  }; 
+		  }
+		  if(isCtLogged == false) {
+			  System.out.println("      Error: Incorrect username or password\n");
+			  System.out.println("``````````````````````````````````````````````````");
+		  }
 //		  System.out.println("   Account name or password does not match");
 //		  System.out.println("````````````````````````````````````````````");
 			  } 
@@ -222,15 +228,21 @@ public class BankingLogics extends Menus {
 	void ViewAccountBalance(int customerId) {
 		String viewBalanceQuery="select account_id, bkaccount_name, Balance, account_type, status from customer inner join accounts using (customer_id) where customer_id="+customerId;
 		CustomerDaoImp ctDao = new CustomerDaoImp();
+		boolean isAccountEmpty = true;
 		ResultSet result = ctDao.SelectAccount(viewBalanceQuery);
 		try {
 				System.out.println("************My Accounts**********\n");
 			while(result.next()) {	
-				if(result.getString(5).equals("true"))
+				if(result.getString(5).equals("true")) {
 				System.out.println("Account: "+result.getString(2)+" | Balance: "+result.getDouble(3)+" | Type: "+result.getString(4)+"\n");
+					isAccountEmpty = false;
+				}
+			}
+			if(isAccountEmpty) {
+				System.out.println("      No accounts available\n");
 			}
 				System.out.println("*********************************");
-				System.out.println("    Enter any keys to go back");
+				System.out.println("    Enter any keys to return");
 				input.nextLine();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -271,7 +283,7 @@ public class BankingLogics extends Menus {
 				}
 			}
 			if(isWithdrawValid) {
-				System.out.println("      The Transaction has been cancelled due to account mismatch\n");
+				System.out.println("      The Transaction has been cancelled due to account information mismatch\n");
 				System.out.println("`````````````````````````````````````````````````````````````````");
 			}
 		} catch (SQLException e) {
