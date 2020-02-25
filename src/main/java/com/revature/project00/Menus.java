@@ -173,4 +173,15 @@ public abstract class Menus extends ValidateInput implements ScannerInput{
 		this.Validate4Options(result);
 		return result;
 	}
+	
+	public String transferMenu() {
+		System.out.println("");
+		System.out.println("   *********Transfer Menu**********\n");
+		System.out.println("      1. Search and Transfer\n");
+		System.out.println("      2. Go Back");
+		String result = input.nextLine();
+		System.out.println("```````````````````````````````````");
+		Validate2Options(result);
+		return result;
+	}
 }

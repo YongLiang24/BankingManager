@@ -10,6 +10,7 @@ public class Customer {
 	private String fullName;
 	private String username;
 	private String password;
+	private int customerId;
 	public Customer(String fullName, String username, String password) {
 		super();
 		this.fullName = fullName;
@@ -18,6 +19,14 @@ public class Customer {
 	}
 	
 	
+	public Customer(String fullName, String username, int customerId) {
+		super();
+		this.fullName = fullName;
+		this.username = username;
+		this.customerId = customerId;
+	}
+
+
 	/**
 	 * This overloaded constructor accepts only username and password for login method
 	 * @param username
@@ -46,6 +55,16 @@ public class Customer {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+
+	public int getCustomerId() {
+		return customerId;
+	}
+
+
+	public void setCustomerId(int customerId) {
+		this.customerId = customerId;
 	}
 	
 }

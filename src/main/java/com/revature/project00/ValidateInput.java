@@ -155,40 +155,73 @@ public abstract class ValidateInput implements ScannerInput{
 	 
 	}
 	 
-		/**
-		 * This method validate both customer and employee login credential matching the database customer accounts.
-		 * @param username
-		 * @param password
-		 * @return
-		 */
-//		protected boolean ValidateLogin(String username, String password, String query) {		
-//			CustomerDaoImp ctDao = new CustomerDaoImp();
-//			ResultSet resultSet = ctDao.SelectAccount(query);
-//			try {
-//
-//				System.out.println(ctDao.SelectAccounts(query).getString(1));
-//				while(resultSet.next()) {
-//				 if(!(username.equals(resultSet.getString("account_name"))|| password.equals(resultSet.getString("account_pass"))))
-//				 	{
-//						System.out.println("****************************************************");
-//						System.out.println("  Incorrect username or password. Please try again ");
-//						System.out.println("****************************************************");
-//						
-//						return false;
-//					} 
-//				 else if(username.equals(resultSet.getString("account_name")) &&  password.equals(resultSet.getString("account_pass")) )
-//				 	{
-//						System.out.println("         ***************");
-//						System.out.println("           Login Success ");
-//						System.out.println("         ***************");
-//					
-//						return true;
-//					}
-//				}
-//			} catch (SQLException e) {
-//				e.printStackTrace();
-//			}
-//			return false;
-//		}
+	 protected int ValidateTransferId() {
+			
+		int accountId =-1;		
+		while(accountId <0) {
+			System.out.println("      Select one of your bank account by ID to make the transfer ");
+			String balanceString = input.nextLine();
+			System.out.println("``````````````````````````````````");
+			try {
+			accountId = Integer.parseInt(balanceString);		
+			if(accountId <1) {
+				System.out.println("Invalid ID, try again");
+				accountId = -1;
+				}		
+			}
+			catch(NumberFormatException e) {
+				System.out.println("Invalid non-numeric input, please try again.");
+				accountId =-1;
+			}
+		}
+		return accountId;
+	 
+	}
+
+	 protected double ValidateTransferAmount() {
+			
+		double balance =-1;		
+		while(balance <0) {
+			System.out.println("      Please enter the amount for the transfer: ");
+			String balanceString = input.nextLine();
+			System.out.println("``````````````````````````````````");
+			try {
+			balance = Double.parseDouble(balanceString);		
+			if(balance <1) {
+				System.out.println("      The amount can not be less than 1");
+				balance = -1;
+				}		
+			}
+			catch(NumberFormatException e) {
+				System.out.println("Invalid non-numeric input, please try again.");
+				balance =-1;
+			}
+		}
+		return balance;
+	 
+	}
+	 
+	 protected int ValidateTransferAccId() {
+			
+		int accountId =-1;		
+		while(accountId <0) {
+			System.out.println("      Please enter an account Id to start the transfer ");
+			String balanceString = input.nextLine();
+			System.out.println("``````````````````````````````````");
+			try {
+			accountId = Integer.parseInt(balanceString);		
+			if(accountId <1) {
+				System.out.println("Invalid ID, try again");
+				accountId = -1;
+				}		
+			}
+			catch(NumberFormatException e) {
+				System.out.println("Invalid non-numeric input, please try again.");
+				accountId =-1;
+			}
+		}
+		return accountId;
+	 
+	}
 
 }

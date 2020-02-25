@@ -2,6 +2,8 @@ package com.revature.project00;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BankingLogics extends Menus {	
 	boolean switchOn = true;
@@ -322,19 +324,93 @@ public class BankingLogics extends Menus {
 	}
 	
 	void AccountTransfer(int customerId) {
-		String viewCustomerQuery="select full_name, account_name,customer_id from customer order by full_name";
-		CustomerDaoImp ctDao = new CustomerDaoImp();
-		ResultSet result = ctDao.SelectAccount(viewCustomerQuery);
+
+		
+		List<BankAccount> accountList = new ArrayList<BankAccount>();
+		String viewAccountQuery="select * from accounts where status = 'true'";
+		CustomerDaoImp ctDao1 = new CustomerDaoImp();
+		ResultSet result1 = ctDao1.SelectAccount(viewAccountQuery);
 		try {
 			System.out.println("************Transfer**********\n");
-			while(result.next()) {
-				System.out.println("Customer name: "+result.getString(1)+" | Account Name: " +result.getString(2)+" | Customer Id:"+result.getInt(3)+"\n");
+			while(result1.next()) {
+				BankAccount bkInfo = new BankAccount(result1.getInt(2), result1.getString(3), result1.getDouble(4), result1.getString(5), result1.getInt(1));
+				accountList.add(bkInfo);
+				//System.out.println("Customer name: "+result.getString(1)+" | Account Name: " +result.getString(2)+" | Customer Id:"+result.getInt(3)+"\n");
 			}		
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
 		
+		
+		
+		
+
+		String tranOption = transferMenu();
+		boolean isSearchValid = true;
+		switch(tranOption) {
+		case "1":
+			System.out.println("      Search by name:\n");
+			String searchInput= input.nextLine();
+			for(BankAccount bk: accountList) {
+				if(bk.getBankAccountName().contains(searchInput)) {
+					System.out.println("   Account Name: "+bk.getBankAccountName()+" | Account ID: "+bk.getAccountId()+" | Account Type: "+bk.getAccountType()+"\n");
+					isSearchValid = false;
+				}
+			}
+			
+			if(isSearchValid) {
+				System.out.println("            No Account Found");
+			}else {
+				int actId =ValidateTransferAccId();//transfer to account Id
+				double tfAmount =ValidateTransferAmount();
+				for(BankAccount bk: accountList) {
+					if(bk.getCustomerId() == customerId) {
+					System.out.println("    Your Banking Accounts:\n");
+					System.out.println("    Account ID: "+bk.getAccountId()+" | Account Name: "+bk.getBankAccountName()+" | Balance: "+bk.getBalance()+" | Account Type: "+bk.getAccountType()+"\n");
+					
+					}
+				}
+				int bkAccountId =ValidateTransferId();//transfer from account id
+				
+				boolean isTransferFrom = false;
+				boolean isTransferTo = false;
+				double tfDifference=0;
+				double tfSum=0;
+				for(BankAccount bk: accountList) {
+					if(bk.getAccountId() == bkAccountId && bk.getBalance() >= tfAmount) {
+						 tfDifference = bk.getBalance() -tfAmount;
+						isTransferFrom = true;
+						
+					}
+					
+					if(bk.getAccountId() == actId) {
+						tfSum=bk.getBalance() + tfAmount;
+						isTransferTo = true;
+					}				
+				}
+				
+				if(isTransferFrom && isTransferTo) {
+					//perform the update and success message
+					System.out.println("      $"+tfAmount+" has successfully transferred\n");
+					//need to write to db for balance updates
+					//update store_information set sales =800 where store_name = 'Boston';
+					String updateTransferFrom="update accounts set balance= "+tfDifference+" where account_id="+bkAccountId;
+					String updateTransferTo="update accounts set balance = "+tfSum+" where account_id="+actId;
+					ctDao1.InsertCustomer(updateTransferFrom);
+					ctDao1.InsertCustomer(updateTransferTo);
+					
+				}else {
+					System.out.println("      Incorrect information, the transaction has been cancelled");
+				}
+				
+				
+			}		
+			break;
+		case"2":
+			break;
+		default:break;
+		}
 		
 	}
 		

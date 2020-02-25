@@ -9,8 +9,29 @@ public class BankAccount {
 	private String accountType;
 	private boolean approvalStatus = false;
 	private double balance=0;
+	private int accountId;
+	private int customerId;
 	
 	
+	
+	public BankAccount(int accountId, String bankAccountName, double balance, String accounType, int customerId) {
+		super();
+		this.accountId = accountId;
+		this.bankAccountName = bankAccountName;
+		this.balance = balance;
+		this.accountType = accounType;
+		this.customerId=customerId;
+		
+	}
+
+	public int getAccountId() {
+		return accountId;
+	}
+
+	public void setAccountId(int accountId) {
+		this.accountId = accountId;
+	}
+
 	public BankAccount(String bankAccountName, String accountType, double balance) {
 		super();
 		this.bankAccountName = bankAccountName;
@@ -54,6 +75,14 @@ public class BankAccount {
 	}
 	public void setBalance(double balance) {
 		this.balance = balance;
+	}
+
+	public int getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(int customerId) {
+		this.customerId = customerId;
 	}
 	
 }
