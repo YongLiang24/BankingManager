@@ -259,8 +259,7 @@ public class BankingLogics extends Menus {
 			while(result2.next()) {
 				if(result2.getInt(1)==accId && result2.getDouble(3)>=withdrawAmount && result2.getString("status").equals("true")) {
 					isWithdrawValid = false;
-					difference = result2.getDouble(3)- withdrawAmount;
-					
+					difference = result2.getDouble(3)- withdrawAmount;				
 					String updateBalQuery="update accounts set balance="+difference+"where account_id="+result2.getInt(1);
 					CustomerDaoImp ctDao1 = new CustomerDaoImp();
 					ctDao1.InsertCustomer(updateBalQuery);
@@ -392,9 +391,7 @@ public class BankingLogics extends Menus {
 					
 				}else {
 					System.out.println("      Incorrect information, the transaction has been cancelled");
-				}
-				
-				
+				}			
 			}		
 			break;
 		case"2":
