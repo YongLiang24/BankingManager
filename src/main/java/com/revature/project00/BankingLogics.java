@@ -205,12 +205,11 @@ public class BankingLogics extends Menus {
 	}
 	
 	void EmpViewAccounts() {
-		String trueAccountsQuery = "select full_name, bkaccount_name, Balance, account_type from customer inner join accounts using (customer_id) order by full_name";
+		String trueAccountsQuery = "select full_name, bkaccount_name, Balance, account_type from customer inner join accounts using (customer_id) where status='true' order by full_name";
 		CustomerDaoImp ctDao = new CustomerDaoImp();
 		ResultSet result=ctDao.SelectAccount(trueAccountsQuery);
 		try {
 			while(result.next()) {
-				if(result.getString("status").equals("true"))
 				System.out.println("Name: "+result.getString(1)+" | Account: "+result.getString(2)+" | Balance: $"+result.getDouble(3) + " | Type: "+result.getString(4)+"\n");
 			}
 		} catch (SQLException e) {
@@ -324,7 +323,6 @@ public class BankingLogics extends Menus {
 	}
 	
 	void AccountTransfer(int customerId) {
-
 		
 		List<BankAccount> accountList = new ArrayList<BankAccount>();
 		String viewAccountQuery="select * from accounts where status = 'true'";
@@ -340,12 +338,6 @@ public class BankingLogics extends Menus {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		
-		
-		
-		
-
 		String tranOption = transferMenu();
 		boolean isSearchValid = true;
 		switch(tranOption) {
@@ -393,8 +385,6 @@ public class BankingLogics extends Menus {
 				if(isTransferFrom && isTransferTo) {
 					//perform the update and success message
 					System.out.println("      $"+tfAmount+" has successfully transferred\n");
-					//need to write to db for balance updates
-					//update store_information set sales =800 where store_name = 'Boston';
 					String updateTransferFrom="update accounts set balance= "+tfDifference+" where account_id="+bkAccountId;
 					String updateTransferTo="update accounts set balance = "+tfSum+" where account_id="+actId;
 					ctDao1.InsertCustomer(updateTransferFrom);
