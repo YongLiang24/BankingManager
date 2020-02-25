@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public abstract class ValidateInput implements ScannerInput{
+public abstract class ValidateInput extends DatabaseCommunicate implements ScannerInput{
 	/**
 	 * This abstract class contains various validation methods to check against the user inputs from the Menu class.
 	 * The Menu class extends this abstract class.

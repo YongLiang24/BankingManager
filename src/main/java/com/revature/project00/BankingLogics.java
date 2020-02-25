@@ -159,7 +159,9 @@ public class BankingLogics extends Menus {
 					  EmpViewAccounts();
 					  break;
 				  case"3":
-					  //View Logs, yet to implement
+					  displayTfLogs();
+					  System.out.println("              *Enter any key to return");
+					  input.nextLine();
 					  break;
 				  case"4":
 					  isEmpLogged = false;
