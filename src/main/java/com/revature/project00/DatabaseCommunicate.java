@@ -11,12 +11,13 @@ public class DatabaseCommunicate implements ScannerInput {
 
 
 	
-	public void displayTfLogs() {
+	public ResultSet displayTfLogs() {
 		String tfLog = "select * from account_balance_log order by updated_time";
 		CustomerDaoImp ctDao = new CustomerDaoImp();
 		int i=0;
 		logger.info("An employee views the transaction log");
 		ResultSet result = ctDao.SelectAccount(tfLog);
+		ResultSet testResult = result;
 		try {
 
 			System.out.println("                   **********Transaction Logs**********\n");
@@ -28,5 +29,9 @@ public class DatabaseCommunicate implements ScannerInput {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		return testResult;
 	}
+	
+	
 }

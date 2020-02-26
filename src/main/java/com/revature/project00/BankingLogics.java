@@ -4,7 +4,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Need refactoring codes in this class.
+ * @author yongl
+ *
+ */
 public class BankingLogics extends Menus {	
 	boolean switchOn = true;
 	boolean isCtLogged = true;
@@ -17,6 +21,9 @@ public class BankingLogics extends Menus {
 
 	}
 
+	public BankingLogics(int t) {
+		
+	}
 	private void MainLogic(String result) {
 		switch (result) {
 		case "1":
