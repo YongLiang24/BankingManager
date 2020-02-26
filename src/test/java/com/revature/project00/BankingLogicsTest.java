@@ -10,14 +10,14 @@ class BankingLogicsTest {
 	@Test
 	void testValidateBalance() {
 		
-		double x =bk.ValidateBalance();
+		double x =bk.validateBalance();
 		assertTrue(x == 10);
 	}
 	
 	@Test
 	void testValidateId() {
 		
-		int x =bk.ValidateAccountId();
+		int x =bk.validateAccountId();
 		assertTrue(x == 10);
 	}
 	

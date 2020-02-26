@@ -5,8 +5,9 @@ public class Main {
 
 	public static void main(String[] args) {		
 
-		 BankingLogics test = new BankingLogics();		 
-
+		 BankingLogics atm = new BankingLogics();		 
+		 atm.runApp();
 	}
 
 }
+ 

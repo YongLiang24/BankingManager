@@ -10,6 +10,6 @@ public interface CustomerDao {
 	 * @param conn
 	 * @param query
 	 */
-	public void InsertCustomer(String query);
-	public ResultSet SelectAccount(String query);
+	public void insertCustomer(String query);
+	public ResultSet selectAccount(String query);
 }

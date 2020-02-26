@@ -16,7 +16,7 @@ public class CustomerDaoImp implements CustomerDao{
 	public static int count =0;
 
 	@Override
-	public void InsertCustomer(String query) {
+	public void insertCustomer(String query) {
 
 		
 		PreparedStatement preSt=null;
@@ -27,7 +27,7 @@ public class CustomerDaoImp implements CustomerDao{
 		}
 	}
 	@Override
-	public ResultSet SelectAccount(String query) {
+	public ResultSet selectAccount(String query) {
 		ResultSet tempResult=null;
 		PreparedStatement preSt=null;
 		ResultSet resultSet=null;

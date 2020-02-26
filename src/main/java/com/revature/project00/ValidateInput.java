@@ -12,7 +12,7 @@ public abstract class ValidateInput extends DatabaseCommunicate implements Scann
 	 * This method validates user inputs when there are two numeric options to choose on the menu.
 	 * @param result
 	 */
-	 protected void Validate2Options(String result) {
+	 protected void validate2Options(String result) {
 		while(!(result.matches("1") || result.matches("2"))) {
 			System.out.println("Invalid input, please type a number from 1-2\n");
 			result = input.nextLine();
@@ -24,7 +24,7 @@ public abstract class ValidateInput extends DatabaseCommunicate implements Scann
 	  * This method validates user inputs when there are three numeric options to choose on the menu.
 	  * @param result
 	  */
-	 protected void Validate3Options(String result) {
+	 protected void validate3Options(String result) {
 		while(!(result.matches("1") || result.matches("2") || result.matches("3"))) {
 			System.out.println("Invalid input, please type a number from 1-3\n");
 			result = input.nextLine();
@@ -36,8 +36,15 @@ public abstract class ValidateInput extends DatabaseCommunicate implements Scann
 	  * This method validates user inputs when there are four numeric options.
 	  * @param result
 	  */
-	 protected void Validate4Options(String result) {
+	 protected void validate4Options(String result) {
 		while(!(result.matches("1") || result.matches("2") || result.matches("3") || result.matches("4"))) {
+			System.out.println("Invalid input, please type a number from 1-4\n");
+			result = input.nextLine();			
+			System.out.println("``````````````````````````````````");
+		}
+	}
+	 protected void validate5Options(String result) {
+		while(!(result.matches("1") || result.matches("2") || result.matches("3") || result.matches("4") || result.matches("5"))) {
 			System.out.println("Invalid input, please type a number from 1-4\n");
 			result = input.nextLine();			
 			System.out.println("``````````````````````````````````");
@@ -48,7 +55,7 @@ public abstract class ValidateInput extends DatabaseCommunicate implements Scann
 	  * This method validates 7 options from user inputs
 	  * @param result
 	  */
-	 protected void Validate7Options(String result) {
+	 protected void validate7Options(String result) {
 		while(!(result.matches("1") || result.matches("2") || result.matches("3") || result.matches("4") 
 				|| result.matches("5") || result.matches("6"))){
 			System.out.println("Invalid input, please type a number from 1-6\n");
@@ -62,7 +69,7 @@ public abstract class ValidateInput extends DatabaseCommunicate implements Scann
 	  * if the input was not a number or less than 1, it will continue to run the while loop and prompts again.
 	  * @return double type value
 	  */
-	 protected double ValidateBalance() {
+	 protected double validateBalance() {
 		
 		double balance =-1;		
 		while(balance <0) {
@@ -84,7 +91,7 @@ public abstract class ValidateInput extends DatabaseCommunicate implements Scann
 		return balance;
 	 
 	}
-	 protected double ValidateWithdrawAmount() {
+	 protected double validateWithdrawAmount() {
 			
 		double balance =-1;		
 		while(balance <0) {
@@ -107,7 +114,7 @@ public abstract class ValidateInput extends DatabaseCommunicate implements Scann
 	 
 	}
 	 
-	 protected double ValidateDepositeAmount() {
+	 protected double validateDepositeAmount() {
 			
 		double balance =-1;		
 		while(balance <0) {
@@ -129,7 +136,7 @@ public abstract class ValidateInput extends DatabaseCommunicate implements Scann
 		return balance;
 	 
 	}
-	 protected int ValidateAccountId() {
+	 protected int validateAccountId() {
 			
 		int accountId =-1;		
 		while(accountId <0) {
@@ -152,7 +159,7 @@ public abstract class ValidateInput extends DatabaseCommunicate implements Scann
 	 
 	}
 	 
-	 protected int ValidateTransferId() {
+	 protected int validateTransferId() {
 			
 		int accountId =-1;		
 		while(accountId <0) {
@@ -175,7 +182,7 @@ public abstract class ValidateInput extends DatabaseCommunicate implements Scann
 	 
 	}
 
-	 protected double ValidateTransferAmount() {
+	 protected double validateTransferAmount() {
 			
 		double balance =-1;		
 		while(balance <0) {
@@ -198,7 +205,7 @@ public abstract class ValidateInput extends DatabaseCommunicate implements Scann
 	 
 	}
 	 
-	 protected int ValidateTransferAccId() {
+	 protected int validateTransferAccId() {
 			
 		int accountId =-1;		
 		while(accountId <0) {
